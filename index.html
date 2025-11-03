@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otomono Jerseys - Premium Custom Jersey Design</title>
+    <meta name="description" content="Create stunning custom jerseys with our advanced 3D designer. Premium quality, fast delivery, and endless customization options.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="apple-touch-icon" href="public/favicon.png">
+
+    <!-- ROG Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rog-red': '#ff0037',
+                        'rog-orange': '#ff6b35',
+                        'rog-dark': '#000000',
+                        'rog-light': '#1a1a1a',
+                        'rog-gray': '#333333',
+                        'rog-blue': '#00d4ff',
+                        'rog-purple': '#8b5cf6',
+                    },
+                    fontFamily: {
+                        'rog-display': ['Orbitron', 'monospace'],
+                        'rog-heading': ['Exo 2', 'sans-serif'],
+                        'rog-body': ['Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': {
+                                opacity: '0'
+                            },
+                            '100%': {
+                                opacity: '1'
+                            },
+                        },
+                        slideUp: {
+                            '0%': {
+                                transform: 'translateY(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInLeft: {
+                            '0%': {
+                                transform: 'translateX(-30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInRight: {
+                            '0%': {
+                                transform: 'translateX(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        float: {
+                            '0%, 100%': {
+                                transform: 'translateY(0px)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
+                        },
+                        glow: {
+                            '0%': {
+                                boxShadow: '0 0 20px rgba(220, 38, 38, 0.5)'
+                            },
+                            '100%': {
+                                boxShadow: '0 0 30px rgba(220, 38, 38, 0.8)'
+                            },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .rog-button {
+            background: linear-gradient(135deg, #ff0037 0%, #ff6b35 50%, #00d4ff 100%);
+            transition: all 0.3s ease;
+            border: 1px solid #ff0037;
+            box-shadow: 0 0 20px rgba(255, 0, 55, 0.3);
+        }
+
+        .rog-button:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff0037 50%, #8b5cf6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 0, 55, 0.6);
+            border-color: #00d4ff;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 30%, #333333 70%, #000000 100%);
+            position: relative;
+        }
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 0, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 0, 55, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .jersey-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .jersey-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 0, 55, 0.3), 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+
+        /* Modern Design Showcase Styles */
+        .design-showcase {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(26, 26, 26, 0.6) 100%);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+
+<body class="bg-rog-dark text-white font-rog-body overflow-x-hidden">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="public/logo.png" alt="Otomono Jerseys" class="h-10 w-auto">
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-rog-red font-rog-heading font-bold glow">Home</a>
+                    <a href="services.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">Services</a>
+                    <a href="about.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">About</a>
+                    <a href="contact.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">Contact</a>
+                </nav>
+
+                <!-- Desktop Admin Panel Button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button id="admin-panel-btn" class="rog-button px-6 py-2 rounded-lg font-rog-heading font-semibold text-white transition-all duration-300 hover:shadow-lg">
+                        <i class="fas fa-cog mr-2"></i>
+                        Admin Panel
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-rog-red transition-colors duration-300">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-rog-light shadow-2xl z-50 md:hidden">
+            <div class="flex items-center justify-between p-6 border-b border-rog-gray">
+                <div class="flex items-center space-x-3">
+                    <img src="public/logo.png" alt="Otomono Jerseys" class="h-8 w-auto">
+                </div>
+                <button id="mobile-menu-close" class="text-white hover:text-rog-red transition-colors duration-300">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <nav class="p-6 space-y-6">
+                <a href="index.html" class="block text-rog-red font-rog-heading font-bold text-lg glow">Home</a>
+                <a href="services.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">Services</a>
+                <a href="about.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">About</a>
+                <a href="contact.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">Contact</a>
+
+                <!-- Mobile Admin Panel Button -->
+                <button id="mobile-admin-panel-btn" class="w-full rog-button px-6 py-3 rounded-lg font-rog-heading font-semibold text-white transition-all duration-300 hover:shadow-lg">
+                    <i class="fas fa-cog mr-2"></i>
+                    Admin Panel
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Background Video -->
+        <div class="absolute inset-0 z-0">
+            <video autoplay muted loop class="w-full h-full object-cover opacity-20">
+                <source src="public/hero.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-rog-display font-bold mb-6 animate-fade-in">
+                    Create Your
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Perfect Jersey
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-slide-up font-rog-body">
+                    Design stunning custom jerseys with our advanced 3D designer.
+                    Premium quality, fast delivery, and endless customization options.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+                    <a href="https://otomonodesignner.vercel.app/" class="rog-button px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg transition-all duration-300 hover:shadow-xl">
+                        <i class="fas fa-paint-brush mr-2"></i>
+                        Start Designing
+                    </a>
+                    <a href="#designs" class="glass-effect px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg text-white hover:bg-white hover:text-rog-dark transition-all duration-300">
+                        <i class="fas fa-eye mr-2"></i>
+                        View Designs
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 animate-float">
+            <div class="w-20 h-20 bg-rog-red/20 rounded-full blur-xl"></div>
+        </div>
+        <div class="absolute bottom-20 right-10 animate-float" style="animation-delay: 2s;">
+            <div class="w-32 h-32 bg-pink-500/20 rounded-full blur-xl"></div>
+        </div>
+    </section>
+
+    <!-- Featured Designs Section -->
+    <section id="designs" class="py-20 bg-rog-light relative overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rog-red/5 via-transparent to-rog-blue/5"></div>
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-rog-red/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-rog-blue/10 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-rog-display font-bold mb-6">
+                    Featured
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Designs
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                    Discover our premium collection of custom jersey designs. Each piece is meticulously crafted with cutting-edge technology and premium materials.
+                </p>
+            </div>
+
+            <!-- Modern Design Showcase -->
+            <div class="max-w-7xl mx-auto">
+                <!-- Main Display Area -->
+                <div class="relative bg-gradient-to-br from-rog-dark/50 to-rog-light/30 backdrop-blur-sm rounded-3xl p-8 border border-rog-red/20 shadow-2xl">
+                    <!-- Current Design Display -->
+                    <div id="current-design" class="relative">
+                        <div class="flex flex-col lg:flex-row items-center gap-12">
+                            <!-- Jersey Image -->
+                            <div class="flex-1 relative group">
+                                <div class="relative overflow-hidden rounded-2xl shadow-2xl">
+                                    <img id="current-jersey-image" src="" alt="" class="w-full h-auto transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                </div>
+                                <!-- Design Badge -->
+                                <div class="absolute top-4 right-4 bg-rog-red/90 backdrop-blur-sm px-4 py-2 rounded-full">
+                                    <span id="current-design-number" class="text-white font-rog-heading font-semibold text-sm">DESIGN NO. 24A001</span>
+                                </div>
+                            </div>
+
+                            <!-- Design Info -->
+                            <div class="flex-1 space-y-6">
+                                <div>
+                                    <h3 id="current-design-title" class="text-3xl lg:text-4xl font-rog-display font-bold text-white mb-4"></h3>
+                                    <p class="text-gray-300 text-lg leading-relaxed">
+                                        Premium quality materials with advanced moisture-wicking technology. Perfect for professional teams and serious athletes.
+                                    </p>
+                                </div>
+
+                                <!-- Features -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-2 h-2 bg-rog-red rounded-full"></div>
+                                        <span class="text-gray-300 font-rog-body">Premium Materials</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-2 h-2 bg-rog-blue rounded-full"></div>
+                                        <span class="text-gray-300 font-rog-body">Moisture Wicking</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-2 h-2 bg-rog-orange rounded-full"></div>
+                                        <span class="text-gray-300 font-rog-body">Custom Design</span>
+                                    </div>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-2 h-2 bg-rog-purple rounded-full"></div>
+                                        <span class="text-gray-300 font-rog-body">Fast Delivery</span>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                                    <button class="rog-button px-8 py-4 rounded-xl font-rog-heading font-semibold text-lg transition-all duration-300 hover:shadow-2xl">
+                                        <i class="fas fa-paint-brush mr-2"></i>
+                                        Customize This Design
+                                    </button>
+                                    <button class="glass-effect px-8 py-4 rounded-xl font-rog-heading font-semibold text-lg text-white hover:bg-white hover:text-rog-dark transition-all duration-300">
+                                        <i class="fas fa-eye mr-2"></i>
+                                        View Details
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Controls -->
+                    <div class="flex items-center justify-between mt-8">
+                        <!-- Previous Button -->
+                        <button id="reel-prev" class="group flex items-center space-x-3 px-6 py-3 bg-rog-red/20 hover:bg-rog-red/30 backdrop-blur-sm rounded-xl border border-rog-red/30 hover:border-rog-red transition-all duration-300">
+                            <i class="fas fa-chevron-left text-rog-red group-hover:text-white transition-colors"></i>
+                            <span class="text-rog-red group-hover:text-white font-rog-heading font-medium transition-colors">Previous</span>
+                        </button>
+
+                        <!-- Play/Pause Button -->
+                        <button id="reel-play" class="w-16 h-16 bg-gradient-to-r from-rog-red to-rog-orange hover:from-rog-orange hover:to-rog-red rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg">
+                            <i id="reel-play-icon" class="fas fa-play text-xl"></i>
+                        </button>
+
+                        <!-- Next Button -->
+                        <button id="reel-next" class="group flex items-center space-x-3 px-6 py-3 bg-rog-red/20 hover:bg-rog-red/30 backdrop-blur-sm rounded-xl border border-rog-red/30 hover:border-rog-red transition-all duration-300">
+                            <span class="text-rog-red group-hover:text-white font-rog-heading font-medium transition-colors">Next</span>
+                            <i class="fas fa-chevron-right text-rog-red group-hover:text-white transition-colors"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Design Thumbnails -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-rog-heading font-semibold text-white mb-6 text-center">Browse All Designs</h3>
+                    <div id="design-thumbnails" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        <!-- Thumbnails will be dynamically generated -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-rog-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6">
+                    Why Choose
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue">
+                        Otomono?
+                    </span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center animate-slide-in-left">
+                    <div class="w-20 h-20 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-palette text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold mb-4">3D Design Studio</h3>
+                    <p class="text-gray-300">Create your perfect jersey with our advanced 3D designer. See your design come to life before you order.</p>
+                </div>
+
+                <div class="text-center animate-slide-up">
+                    <div class="w-20 h-20 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-shipping-fast text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold mb-4">Fast Delivery</h3>
+                    <p class="text-gray-300">Get your custom jerseys delivered quickly with our efficient production and shipping process.</p>
+                </div>
+
+                <div class="text-center animate-slide-in-right">
+                    <div class="w-20 h-20 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-award text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold mb-4">Premium Quality</h3>
+                    <p class="text-gray-300">We use only the finest materials and latest printing technology to ensure your jerseys are perfect.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6 text-white">
+                Ready to Create Your Jersey?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                Join thousands of satisfied customers who have created their perfect jerseys with us.
+            </p>
+            <a href="/designer-studio.html" class="inline-block bg-white text-rog-red px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg transition-all duration-300 hover:bg-gray-100 hover:scale-105">
+                <i class="fas fa-rocket mr-2"></i>
+                Start Your Design Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="public/logo.png" alt="Otomono Jerseys" class="h-10 w-auto">
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Creating premium custom jerseys with cutting-edge 3D design technology.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-rog-red transition-colors duration-300">Home</a></li>
+                        <li><a href="#designs" class="text-gray-400 hover:text-rog-red transition-colors duration-300">Designs</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-rog-red transition-colors duration-300">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-rog-red transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300">Custom Jerseys</a></li>
+                        <li><a href="3D-Jersey-Designer/designer-studio.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300">3D Designer</a></li>
+                        <li><a href="client-order-form.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300">Order Form</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Contact</h3>
+                    <div class="space-y-2 text-gray-400">
+                        <p><i class="fas fa-envelope mr-2"></i>info@otomono.mv</p>
+                        <p><i class="fas fa-phone mr-2"></i>+960 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i>Malé, Maldives</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2024 Otomono Jerseys. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            function openMobileMenu() {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openMobileMenu();
+                });
+            }
+
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    closeMobileMenu();
+                });
+            }
+
+            // Close menu when clicking outside
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target === mobileMenu) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Close menu when clicking on navigation links
+            mobileMenu.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Keyboard support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Modern Design Showcase functionality
+        function setupDesignsReel() {
+            const jerseyDesigns = [{
+                    id: 1,
+                    image: 'jersey-designs/Mockup24A001.jpg',
+                    title: 'Classic Red Jersey',
+                    number: '24A001'
+                },
+                {
+                    id: 2,
+                    image: 'jersey-designs/Mockup24A002.jpg',
+                    title: 'Blue Thunder Jersey',
+                    number: '24A002'
+                },
+                {
+                    id: 3,
+                    image: 'jersey-designs/Mockup24A003.jpg',
+                    title: 'Green Machine Jersey',
+                    number: '24A003'
+                },
+                {
+                    id: 4,
+                    image: 'jersey-designs/Mockup24A004.jpg',
+                    title: 'Golden Eagle Jersey',
+                    number: '24A004'
+                },
+                {
+                    id: 5,
+                    image: 'jersey-designs/Mockup24A005.jpg',
+                    title: 'Purple Storm Jersey',
+                    number: '24A005'
+                },
+                {
+                    id: 6,
+                    image: 'jersey-designs/Mockup24A006.jpg',
+                    title: 'Orange Blaze Jersey',
+                    number: '24A006'
+                },
+                {
+                    id: 7,
+                    image: 'jersey-designs/Mockup24A007.jpg',
+                    title: 'Silver Lightning Jersey',
+                    number: '24A007'
+                },
+                {
+                    id: 8,
+                    image: 'jersey-designs/Mockup24A008.jpg',
+                    title: 'Black Panther Jersey',
+                    number: '24A008'
+                },
+                {
+                    id: 9,
+                    image: 'jersey-designs/Mockup24A009.jpg',
+                    title: 'White Knight Jersey',
+                    number: '24A009'
+                },
+                {
+                    id: 10,
+                    image: 'jersey-designs/Mockup24A010.jpg',
+                    title: 'Crimson Fire Jersey',
+                    number: '24A010'
+                }
+            ];
+
+            let currentSlide = 0;
+            let isPlaying = false;
+            let playInterval;
+
+            const currentJerseyImage = document.getElementById('current-jersey-image');
+            const currentDesignTitle = document.getElementById('current-design-title');
+            const currentDesignNumber = document.getElementById('current-design-number');
+            const thumbnailsContainer = document.getElementById('design-thumbnails');
+            const prevBtn = document.getElementById('reel-prev');
+            const nextBtn = document.getElementById('reel-next');
+            const playBtn = document.getElementById('reel-play');
+            const playIcon = document.getElementById('reel-play-icon');
+
+            // Initialize thumbnails with lazy loading
+            function initThumbnails() {
+                thumbnailsContainer.innerHTML = '';
+                jerseyDesigns.forEach((design, index) => {
+                    const thumbnail = document.createElement('div');
+                    thumbnail.className = `relative group cursor-pointer transition-all duration-300 hover:scale-105 ${index === 0 ? 'ring-2 ring-rog-red' : ''}`;
+                    thumbnail.innerHTML = `
+                        <div class="relative overflow-hidden rounded-xl shadow-lg">
+                            <img src="${design.image}" alt="${design.title}" class="w-full h-32 object-cover" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-2 left-2 right-2">
+                                <h4 class="text-white font-rog-heading font-semibold text-sm">${design.title}</h4>
+                            </div>
+                        </div>
+                    `;
+                    thumbnail.addEventListener('click', () => goToSlide(index));
+                    thumbnailsContainer.appendChild(thumbnail);
+                });
+            }
+
+            // Update current design display
+            function updateCurrentDesign() {
+                const design = jerseyDesigns[currentSlide];
+                if (currentJerseyImage) currentJerseyImage.src = design.image;
+                if (currentJerseyImage) currentJerseyImage.alt = design.title;
+                if (currentDesignTitle) currentDesignTitle.textContent = design.title;
+                if (currentDesignNumber) currentDesignNumber.textContent = `DESIGN NO. ${design.number}`;
+
+                // Update thumbnail selection
+                const thumbnails = thumbnailsContainer.querySelectorAll('div');
+                thumbnails.forEach((thumb, index) => {
+                    if (index === currentSlide) {
+                        thumb.classList.add('ring-2', 'ring-rog-red');
+                    } else {
+                        thumb.classList.remove('ring-2', 'ring-rog-red');
+                    }
+                });
+            }
+
+            // Go to specific slide
+            function goToSlide(index) {
+                currentSlide = index;
+                updateCurrentDesign();
+            }
+
+            // Next slide
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % jerseyDesigns.length;
+                updateCurrentDesign();
+            }
+
+            // Previous slide
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + jerseyDesigns.length) % jerseyDesigns.length;
+                updateCurrentDesign();
+            }
+
+            // Toggle play/pause
+            function togglePlay() {
+                isPlaying = !isPlaying;
+                if (isPlaying) {
+                    playIcon.className = 'fas fa-pause text-xl';
+                    playInterval = setInterval(nextSlide, 4000);
+                } else {
+                    playIcon.className = 'fas fa-play text-xl';
+                    clearInterval(playInterval);
+                }
+            }
+
+            // Event listeners
+            if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    prevSlide();
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    nextSlide();
+                });
+            }
+
+            if (playBtn) {
+                playBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    togglePlay();
+                });
+            }
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === ' ') {
+                    e.preventDefault();
+                    togglePlay();
+                }
+            });
+
+            // Initialize
+            initThumbnails();
+            updateCurrentDesign();
+
+            // Initialize without auto-play for better performance
+            // Auto-play can be started manually by user
+        }
+
+        // Admin panel functionality
+        function setupAdminPanelButtons() {
+            const adminPanelBtn = document.getElementById('admin-panel-btn');
+            const mobileAdminPanelBtn = document.getElementById('mobile-admin-panel-btn');
+
+            if (adminPanelBtn) {
+                adminPanelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'login.html';
+                });
+            }
+
+            if (mobileAdminPanelBtn) {
+                mobileAdminPanelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'login.html';
+                });
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileMenu();
+            setupDesignsReel();
+            setupAdminPanelButtons();
+            setupSmoothScrolling();
+        });
+    </script>
+</body>
+
+</html>

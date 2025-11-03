@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order - Otomono Jerseys</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="apple-touch-icon" href="public/favicon.png">
+
+    <!-- ROG Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rog-red': '#ff0037',
+                        'rog-orange': '#ff6b35',
+                        'rog-dark': '#000000',
+                        'rog-light': '#1a1a1a',
+                        'rog-gray': '#333333',
+                        'rog-blue': '#00d4ff',
+                        'rog-purple': '#8b5cf6',
+                    },
+                    fontFamily: {
+                        'rog-display': ['Orbitron', 'monospace'],
+                        'rog-heading': ['Exo 2', 'sans-serif'],
+                        'rog-body': ['Roboto', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNWEchdrKX9A2WdMa3VTnpbKgo0_eWqHE",
+            authDomain: "otomono-c9938.firebaseapp.com",
+            projectId: "otomono-c9938",
+            storageBucket: "otomono-c9938.firebasestorage.app",
+            messagingSenderId: "348906539551",
+            appId: "1:348906539551:web:e249c40d0ae9e2964a632a",
+            measurementId: "G-YVL497L1V3"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Make Firebase available globally
+        window.firebaseAuth = auth;
+        window.firebaseDb = db;
+        window.collection = collection;
+        window.addDoc = addDoc;
+
+        console.log('Firebase initialized successfully');
+    </script>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        .rog-button {
+            background: linear-gradient(135deg, #ff0037 0%, #ff6b35 50%, #00d4ff 100%);
+            transition: all 0.3s ease;
+            border: 1px solid #ff0037;
+            box-shadow: 0 0 20px rgba(255, 0, 55, 0.3);
+        }
+
+        .rog-button:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff0037 50%, #8b5cf6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 0, 55, 0.6);
+        }
+
+        .form-input {
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+
+        .step-indicator.active {
+            background: linear-gradient(135deg, #ff0037, #ff6b35);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-rog-dark text-white">
+    <!-- Navigation Header -->
+    <nav class="bg-rog-light/50 backdrop-blur-sm border-b border-rog-red/30 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <img src="public/logo.png" alt="Otomono" class="h-8 w-auto">
+                        <span class="text-xl font-rog-display font-bold text-white">Otomono</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-home mr-1"></i>Home
+                    </a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">
+                        <i class="fas fa-envelope mr-1"></i>Contact
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-rog-display font-bold text-white mb-4">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue">New Order</span>
+            </h1>
+            <p class="text-gray-400 text-lg font-rog-body">Fill out the form below to place your custom jersey order</p>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="mb-8">
+            <div class="flex items-center justify-center space-x-4">
+                <div class="step-indicator active flex items-center justify-center w-12 h-12 rounded-full bg-rog-red text-white font-bold">
+                    1
+                </div>
+                <div class="h-1 w-24 bg-rog-gray"></div>
+                <div class="step-indicator flex items-center justify-center w-12 h-12 rounded-full bg-rog-gray text-gray-400 font-bold" id="step2">
+                    2
+                </div>
+                <div class="h-1 w-24 bg-rog-gray"></div>
+                <div class="step-indicator flex items-center justify-center w-12 h-12 rounded-full bg-rog-gray text-gray-400 font-bold" id="step3">
+                    3
+                </div>
+            </div>
+            <div class="flex justify-between mt-2 text-sm text-gray-400">
+                <span class="font-rog-body">Customer Info</span>
+                <span class="font-rog-body">Order Details</span>
+                <span class="font-rog-body">Review</span>
+            </div>
+        </div>
+
+        <!-- Order Form -->
+        <form id="newOrderForm" class="bg-rog-light/50 backdrop-blur-sm rounded-2xl p-8 border border-rog-red/30 shadow-2xl">
+            <!-- Step 1: Customer Information -->
+            <div id="step1Content" class="space-y-6">
+                <h2 class="text-2xl font-rog-heading font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-user-circle text-rog-red mr-3"></i>
+                    Customer Information
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-user mr-1"></i>Full Name *
+                        </label>
+                        <input type="text" id="customerName" name="customerName" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rog-red" placeholder="Enter your full name">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-envelope mr-1"></i>Email Address *
+                        </label>
+                        <input type="email" id="customerEmail" name="customerEmail" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rog-red" placeholder="your.email@example.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-phone mr-1"></i>Phone Number *
+                        </label>
+                        <input type="tel" id="customerPhone" name="customerPhone" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rog-red" placeholder="+1 (555) 123-4567">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-map-marker-alt mr-1"></i>City *
+                        </label>
+                        <input type="text" id="customerCity" name="customerCity" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rog-red" placeholder="Enter your city">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                        <i class="fas fa-map-marked-alt mr-1"></i>Delivery Address *
+                    </label>
+                    <textarea id="deliveryAddress" name="deliveryAddress" rows="3" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rog-red" placeholder="Enter complete delivery address"></textarea>
+                </div>
+
+                <div class="flex justify-end">
+                    <button type="button" onclick="nextStep()" class="rog-button px-8 py-3 rounded-lg font-rog-heading font-semibold text-white">
+                        Next: Order Details <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Order Details -->
+            <div id="step2Content" class="space-y-6 hidden">
+                <h2 class="text-2xl font-rog-heading font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-shopping-cart text-rog-red mr-3"></i>
+                    Order Details
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-tshirt mr-1"></i>Jersey Type *
+                        </label>
+                        <select id="jerseyType" name="jerseyType" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-rog-red">
+                            <option value="">Select Jersey Type</option>
+                            <option value="Replica">Replica</option>
+                            <option value="Authentic">Authentic</option>
+                            <option value="Training">Training</option>
+                            <option value="Custom">Custom Design</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-palette mr-1"></i>Material *
+                        </label>
+                        <select id="material" name="material" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-rog-red">
+                            <option value="">Select Material</option>
+                            <option value="Cotton">Cotton</option>
+                            <option value="Polyester">Polyester</option>
+                            <option value="Mesh">Mesh</option>
+                            <option value="Dri-FIT">Dri-FIT</option>
+                            <option value="Jacquard">Jacquard</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Performance">Performance</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-ruler mr-1"></i>Size *
+                        </label>
+                        <select id="size" name="size" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-rog-red">
+                            <option value="">Select Size</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                            <option value="XXXL">XXXL</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-hashtag mr-1"></i>Quantity *
+                        </label>
+                        <input type="number" id="quantity" name="quantity" min="1" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rog-red" placeholder="Enter quantity" value="1">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-dollar-sign mr-1"></i>Price per Unit ($) *
+                        </label>
+                        <input type="number" id="pricePerUnit" name="pricePerUnit" step="0.01" min="0" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rog-red" placeholder="0.00">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            <i class="fas fa-credit-card mr-1"></i>Payment Method *
+                        </label>
+                        <select id="paymentMethod" name="paymentMethod" required class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-rog-red">
+                            <option value="">Select Payment Method</option>
+                            <option value="cash">Cash on Delivery</option>
+                            <option value="card">Credit/Debit Card</option>
+                            <option value="bank">Bank Transfer</option>
+                            <option value="paypal">PayPal</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                        <i class="fas fa-paint-brush mr-1"></i>Design/Style Notes
+                    </label>
+                    <textarea id="designNotes" name="designNotes" rows="4" class="form-input w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rog-red" placeholder="Describe any special design requirements, colors, logos, or text you want on the jersey..."></textarea>
+                </div>
+
+                <div class="flex justify-between">
+                    <button type="button" onclick="previousStep()" class="px-8 py-3 bg-gray-600 text-white rounded-lg font-rog-heading font-semibold hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Previous
+                    </button>
+                    <button type="button" onclick="nextStep()" class="rog-button px-8 py-3 rounded-lg font-rog-heading font-semibold text-white">
+                        Next: Review <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Review & Submit -->
+            <div id="step3Content" class="space-y-6 hidden">
+                <h2 class="text-2xl font-rog-heading font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-check-circle text-rog-red mr-3"></i>
+                    Review Order
+                </h2>
+
+                <div class="bg-rog-light/30 rounded-lg p-6 space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h3 class="font-rog-heading font-semibold text-rog-red mb-2">Customer Information</h3>
+                            <div class="text-gray-300 space-y-1 text-sm">
+                                <p><strong>Name:</strong> <span id="reviewName"></span></p>
+                                <p><strong>Email:</strong> <span id="reviewEmail"></span></p>
+                                <p><strong>Phone:</strong> <span id="reviewPhone"></span></p>
+                                <p><strong>City:</strong> <span id="reviewCity"></span></p>
+                                <p><strong>Address:</strong> <span id="reviewAddress"></span></p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-rog-heading font-semibold text-rog-red mb-2">Order Details</h3>
+                            <div class="text-gray-300 space-y-1 text-sm">
+                                <p><strong>Type:</strong> <span id="reviewType"></span></p>
+                                <p><strong>Material:</strong> <span id="reviewMaterial"></span></p>
+                                <p><strong>Size:</strong> <span id="reviewSize"></span></p>
+                                <p><strong>Quantity:</strong> <span id="reviewQuantity"></span></p>
+                                <p><strong>Price/Unit:</strong> $<span id="reviewPrice"></span></p>
+                                <p><strong>Payment:</strong> <span id="reviewPayment"></span></p>
+                                <p class="mt-2 pt-2 border-t border-rog-gray"><strong class="text-lg">Total:</strong> <span id="reviewTotal" class="text-rog-blue font-bold"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-rog-gray">
+                        <h3 class="font-rog-heading font-semibold text-rog-red mb-2">Design Notes</h3>
+                        <p class="text-gray-300 text-sm" id="reviewNotes">No special notes</p>
+                    </div>
+                </div>
+
+                <div class="flex justify-between">
+                    <button type="button" onclick="previousStep()" class="px-8 py-3 bg-gray-600 text-white rounded-lg font-rog-heading font-semibold hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Previous
+                    </button>
+                    <button type="submit" class="rog-button px-8 py-3 rounded-lg font-rog-heading font-semibold text-white">
+                        <i class="fas fa-check mr-2"></i>Submit Order
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center">
+            <div class="bg-rog-light rounded-2xl p-8 max-w-md w-full mx-4 border border-rog-red/30">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-white mb-2">Order Submitted!</h3>
+                    <p class="text-gray-300 mb-6">Your order has been successfully submitted. We'll contact you soon.</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="index.html" class="rog-button px-6 py-3 rounded-lg font-rog-heading font-semibold text-white">
+                            <i class="fas fa-home mr-2"></i>Back to Home
+                        </a>
+                        <button onclick="resetForm()" class="px-6 py-3 bg-gray-600 text-white rounded-lg font-rog-heading font-semibold hover:bg-gray-700 transition-colors">
+                            New Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function nextStep() {
+            // Validate current step
+            if (currentStep === 1) {
+                const requiredFields = ['customerName', 'customerEmail', 'customerPhone', 'customerCity', 'deliveryAddress'];
+                let isValid = true;
+                requiredFields.forEach(field => {
+                    const input = document.getElementById(field);
+                    if (!input.value.trim()) {
+                        input.classList.add('border-red-500');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+                if (!isValid) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+            } else if (currentStep === 2) {
+                const requiredFields = ['jerseyType', 'material', 'size', 'quantity', 'pricePerUnit', 'paymentMethod'];
+                let isValid = true;
+                requiredFields.forEach(field => {
+                    const input = document.getElementById(field);
+                    if (!input.value.trim()) {
+                        input.classList.add('border-red-500');
+                        isValid = false;
+                    } else {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+                if (!isValid) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                updateReview();
+            }
+
+            if (currentStep < totalSteps) {
+                // Hide current step
+                document.getElementById(`step${currentStep}Content`).classList.add('hidden');
+                // Show next step
+                currentStep++;
+                document.getElementById(`step${currentStep}Content`).classList.remove('hidden');
+                // Update step indicator
+                document.getElementById(`step${currentStep}`).classList.remove('bg-rog-gray', 'text-gray-400');
+                document.getElementById(`step${currentStep}`).classList.add('bg-rog-red', 'text-white');
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                // Hide current step
+                document.getElementById(`step${currentStep}Content`).classList.add('hidden');
+                // Show previous step
+                currentStep--;
+                document.getElementById(`step${currentStep}Content`).classList.remove('hidden');
+                // Update step indicator
+                document.getElementById(`step${currentStep + 1}`).classList.remove('bg-rog-red', 'text-white');
+                document.getElementById(`step${currentStep + 1}`).classList.add('bg-rog-gray', 'text-gray-400');
+            }
+        }
+
+        function updateReview() {
+            document.getElementById('reviewName').textContent = document.getElementById('customerName').value;
+            document.getElementById('reviewEmail').textContent = document.getElementById('customerEmail').value;
+            document.getElementById('reviewPhone').textContent = document.getElementById('customerPhone').value;
+            document.getElementById('reviewCity').textContent = document.getElementById('customerCity').value;
+            document.getElementById('reviewAddress').textContent = document.getElementById('deliveryAddress').value;
+            document.getElementById('reviewType').textContent = document.getElementById('jerseyType').value;
+            document.getElementById('reviewMaterial').textContent = document.getElementById('material').value;
+            document.getElementById('reviewSize').textContent = document.getElementById('size').value;
+            document.getElementById('reviewQuantity').textContent = document.getElementById('quantity').value;
+            document.getElementById('reviewPrice').textContent = parseFloat(document.getElementById('pricePerUnit').value).toFixed(2);
+            document.getElementById('reviewPayment').textContent = document.getElementById('paymentMethod').value.charAt(0).toUpperCase() + document.getElementById('paymentMethod').value.slice(1);
+
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const price = parseFloat(document.getElementById('pricePerUnit').value);
+            const total = (quantity * price).toFixed(2);
+            document.getElementById('reviewTotal').textContent = `$${total}`;
+
+            const notes = document.getElementById('designNotes').value;
+            document.getElementById('reviewNotes').textContent = notes || 'No special notes';
+        }
+
+        function resetForm() {
+            document.getElementById('newOrderForm').reset();
+            currentStep = 1;
+            document.getElementById('step1Content').classList.remove('hidden');
+            document.getElementById('step2Content').classList.add('hidden');
+            document.getElementById('step3Content').classList.add('hidden');
+            document.getElementById('step2').classList.remove('bg-rog-red', 'text-white');
+            document.getElementById('step2').classList.add('bg-rog-gray', 'text-gray-400');
+            document.getElementById('step3').classList.remove('bg-rog-red', 'text-white');
+            document.getElementById('step3').classList.add('bg-rog-gray', 'text-gray-400');
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        // Calculate total on quantity/price change
+        document.getElementById('quantity') ? .addEventListener('input', function() {
+            if (currentStep === 3) updateReview();
+        });
+
+        document.getElementById('pricePerUnit') ? .addEventListener('input', function() {
+            if (currentStep === 3) updateReview();
+        });
+
+        // Form submission
+        document.getElementById('newOrderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            try {
+                // Ensure Firebase is ready
+                if (!window.firebaseDb || !window.collection || !window.addDoc) {
+                    throw new Error('Firebase not initialized');
+                }
+
+                // Collect form data
+                const orderData = {
+                    customer: document.getElementById('customerName').value,
+                    email: document.getElementById('customerEmail').value,
+                    phone: document.getElementById('customerPhone').value,
+                    city: document.getElementById('customerCity').value,
+                    address: document.getElementById('deliveryAddress').value,
+                    jerseyType: document.getElementById('jerseyType').value,
+                    material: document.getElementById('material').value,
+                    size: document.getElementById('size').value,
+                    quantity: parseInt(document.getElementById('quantity').value),
+                    pricePerUnit: parseFloat(document.getElementById('pricePerUnit').value),
+                    paymentMethod: document.getElementById('paymentMethod').value,
+                    designNotes: document.getElementById('designNotes').value || '',
+                    status: 'pending',
+                    createdAt: new Date(),
+                    updatedAt: new Date()
+                };
+
+                // Calculate total
+                orderData.totalAmount = orderData.quantity * orderData.pricePerUnit;
+
+                // Save to Firebase
+                const ordersRef = window.collection(window.firebaseDb, 'orders');
+                await window.addDoc(ordersRef, orderData);
+
+                console.log('Order saved successfully:', orderData);
+
+                // Show success modal
+                document.getElementById('successModal').classList.remove('hidden');
+
+            } catch (error) {
+                console.error('Error submitting order:', error);
+                alert('Error submitting order. Please try again.');
+            }
+        });
+    </script>
+</body>
+
+</html>

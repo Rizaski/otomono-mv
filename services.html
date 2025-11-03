@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Otomono Jerseys</title>
+    <meta name="description" content="Professional jersey design and printing services. Custom team uniforms, sportswear, and premium quality jerseys with fast delivery.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="apple-touch-icon" href="public/favicon.png">
+
+    <!-- ROG Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rog-red': '#ff0037',
+                        'rog-orange': '#ff6b35',
+                        'rog-dark': '#000000',
+                        'rog-light': '#1a1a1a',
+                        'rog-gray': '#333333',
+                        'rog-blue': '#00d4ff',
+                        'rog-purple': '#8b5cf6',
+                    },
+                    fontFamily: {
+                        'rog-display': ['Orbitron', 'monospace'],
+                        'rog-heading': ['Exo 2', 'sans-serif'],
+                        'rog-body': ['Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': {
+                                opacity: '0'
+                            },
+                            '100%': {
+                                opacity: '1'
+                            },
+                        },
+                        slideUp: {
+                            '0%': {
+                                transform: 'translateY(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInLeft: {
+                            '0%': {
+                                transform: 'translateX(-30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInRight: {
+                            '0%': {
+                                transform: 'translateX(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        float: {
+                            '0%, 100%': {
+                                transform: 'translateY(0px)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
+                        },
+                        glow: {
+                            '0%': {
+                                boxShadow: '0 0 20px rgba(220, 38, 38, 0.5)'
+                            },
+                            '100%': {
+                                boxShadow: '0 0 30px rgba(220, 38, 38, 0.8)'
+                            },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .rog-button {
+            background: linear-gradient(135deg, #ff0037 0%, #ff6b35 50%, #00d4ff 100%);
+            transition: all 0.3s ease;
+            border: 1px solid #ff0037;
+            box-shadow: 0 0 20px rgba(255, 0, 55, 0.3);
+        }
+
+        .rog-button:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff0037 50%, #8b5cf6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 0, 55, 0.6);
+            border-color: #00d4ff;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 30%, #333333 70%, #000000 100%);
+            position: relative;
+        }
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 0, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 0, 55, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 0, 55, 0.3), 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-rog-dark text-white font-rog-body overflow-x-hidden">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="public/logo.png" alt="Otomono Jerseys" class="h-10 w-auto">
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">Home</a>
+                    <a href="services.html" class="text-rog-red font-rog-heading font-bold glow">Services</a>
+                    <a href="about.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">About</a>
+                    <a href="contact.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">Contact</a>
+                </nav>
+
+                <!-- Desktop Admin Panel Button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button id="admin-panel-btn" class="rog-button px-6 py-2 rounded-lg font-rog-heading font-semibold text-white transition-all duration-300 hover:shadow-lg">
+                        <i class="fas fa-cog mr-2"></i>
+                        Admin Panel
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-rog-red transition-colors duration-300">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-rog-light shadow-2xl z-50 md:hidden">
+            <div class="flex items-center justify-between p-6 border-b border-rog-gray">
+                <div class="flex items-center space-x-3">
+                    <img src="public/logo.png" alt="Otomono Jerseys" class="h-8 w-auto">
+                </div>
+                <button id="mobile-menu-close" class="text-white hover:text-rog-red transition-colors duration-300">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <nav class="p-6 space-y-6">
+                <a href="index.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">Home</a>
+                <a href="services.html" class="block text-rog-red font-rog-heading font-bold text-lg glow">Services</a>
+                <a href="about.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">About</a>
+                <a href="contact.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">Contact</a>
+
+                <!-- Mobile Admin Panel Button -->
+                <button id="mobile-admin-panel-btn" class="w-full rog-button px-6 py-3 rounded-lg font-rog-heading font-semibold text-white transition-all duration-300 hover:shadow-lg">
+                    <i class="fas fa-cog mr-2"></i>
+                    Admin Panel
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="services" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rog-red/5 via-transparent to-rog-blue/5"></div>
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-rog-red/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-rog-blue/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-rog-display font-bold mb-6 animate-fade-in">
+                    Our
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Services
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-slide-up font-rog-body">
+                    Comprehensive jersey solutions from design to delivery. We provide everything you need for your team's perfect jerseys.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+                    <a href="https://otomonodesignner.vercel.app/" class="rog-button px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg transition-all duration-300 hover:shadow-xl">
+                        <i class="fas fa-paint-brush mr-2"></i>
+                        Start Designing
+                    </a>
+                    <a href="client-order-form.html" class="glass-effect px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg text-white hover:bg-white hover:text-rog-dark transition-all duration-300">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Place Order
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Services Section -->
+    <section class="py-20 bg-rog-light relative overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rog-red/5 via-transparent to-rog-blue/5"></div>
+        <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-rog-orange/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-rog-purple/10 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6">
+                    Premium
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Services
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-rog-body">
+                    From concept to completion, we deliver exceptional jersey solutions tailored to your needs
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Jersey Printing -->
+                <div class="service-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-in-left">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-print text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">JERSEY PRINTING</h3>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">
+                        High-quality printing using advanced techniques and premium materials for durable, vibrant designs.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Screen printing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Heat transfer vinyl</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Sublimation printing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Embroidery options</li>
+                    </ul>
+                </div>
+
+                <!-- Jersey Designing -->
+                <div class="service-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-up">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-palette text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">JERSEY DESIGNING</h3>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">
+                        Creative design services to bring your team's vision to life with professional expertise.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Custom logo design</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Team branding</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Color scheme selection</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Digital mockups</li>
+                    </ul>
+                </div>
+
+                <!-- Bulk Ordering -->
+                <div class="service-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-in-right">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-boxes text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">BULK ORDERING</h3>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">
+                        Specialized services for large orders with competitive pricing and efficient production.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Volume discounts</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Fast production</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Quality assurance</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Flexible scheduling</li>
+                    </ul>
+                </div>
+
+                <!-- Branding & Customization -->
+                <div class="service-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-in-left">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-tags text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">BRANDING & CUSTOMIZATION</h3>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">
+                        Complete branding solutions to establish your team's unique identity and market presence.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Team identity packages</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Marketing materials</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Uniform coordination</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Brand guidelines</li>
+                    </ul>
+                </div>
+
+                <!-- Customer Support -->
+                <div class="service-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-up">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-headset text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">CUSTOMER SUPPORT</h3>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">
+                        Dedicated support team providing assistance throughout your order and beyond.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>24/7 customer support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Order tracking</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Design consultations</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Technical support</li>
+                    </ul>
+                </div>
+
+                <!-- After-Sales Services -->
+                <div class="service-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-in-right">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-heart text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">AFTER-SALES SERVICES</h3>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">
+                        Comprehensive post-purchase support ensuring your complete satisfaction.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Warranty coverage</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Repair services</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Replacement options</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Maintenance tips</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="py-20 bg-rog-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6">
+                    Our
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Process
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-rog-body">
+                    From initial consultation to final delivery, we ensure a seamless experience
+                </p>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center animate-slide-in-left">
+                        <div class="w-16 h-16 bg-rog-red rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white font-rog-heading font-bold text-xl">1</span>
+                        </div>
+                        <h3 class="text-xl font-rog-heading font-bold text-white mb-4">CONSULTATION</h3>
+                        <p class="text-gray-300 font-rog-body">Discuss your requirements and vision with our experts</p>
+                    </div>
+
+                    <div class="text-center animate-slide-up">
+                        <div class="w-16 h-16 bg-rog-red rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white font-rog-heading font-bold text-xl">2</span>
+                        </div>
+                        <h3 class="text-xl font-rog-heading font-bold text-white mb-4">DESIGN</h3>
+                        <p class="text-gray-300 font-rog-body">Create custom designs and digital mockups</p>
+                    </div>
+
+                    <div class="text-center animate-slide-up">
+                        <div class="w-16 h-16 bg-rog-red rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white font-rog-heading font-bold text-xl">3</span>
+                        </div>
+                        <h3 class="text-xl font-rog-heading font-bold text-white mb-4">PRODUCTION</h3>
+                        <p class="text-gray-300 font-rog-body">High-quality printing and manufacturing</p>
+                    </div>
+
+                    <div class="text-center animate-slide-in-right">
+                        <div class="w-16 h-16 bg-rog-red rounded-full flex items-center justify-center mx-auto mb-6">
+                            <span class="text-white font-rog-heading font-bold text-xl">4</span>
+                        </div>
+                        <h3 class="text-xl font-rog-heading font-bold text-white mb-4">DELIVERY</h3>
+                        <p class="text-gray-300 font-rog-body">Fast and secure shipping to your location</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 bg-rog-gray">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6">
+                    Flexible
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Pricing
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-rog-body">
+                    Competitive pricing options to fit every budget and requirement
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Small Orders -->
+                <div class="bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-in-left">
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">SMALL ORDERS</h3>
+                    <div class="text-4xl font-rog-display font-bold text-white mb-4 text-center">1-24 JERSEYS</div>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">Perfect for individual players or small teams</p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Standard pricing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>5-7 day production</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Basic customization</li>
+                    </ul>
+                </div>
+
+                <!-- Medium Orders -->
+                <div class="bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-up">
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">MEDIUM ORDERS</h3>
+                    <div class="text-4xl font-rog-display font-bold text-white mb-4 text-center">25-99 JERSEYS</div>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">Great for club teams and organizations</p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>10% volume discount</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>3-5 day production</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Enhanced customization</li>
+                    </ul>
+                </div>
+
+                <!-- Large Orders -->
+                <div class="bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 animate-slide-in-right">
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4 text-center">LARGE ORDERS</h3>
+                    <div class="text-4xl font-rog-display font-bold text-white mb-4 text-center">100+ JERSEYS</div>
+                    <p class="text-gray-300 mb-6 font-rog-body text-center">Ideal for leagues and large organizations</p>
+                    <ul class="text-sm text-gray-400 space-y-2 font-rog-body">
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>20% volume discount</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>2-3 day production</li>
+                        <li class="flex items-center"><i class="fas fa-check text-rog-red mr-2"></i>Full customization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Assurance Section -->
+    <section class="py-20 bg-rog-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6">
+                    Quality
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Assurance
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-rog-body">
+                    Every jersey undergoes rigorous quality checks to ensure it meets our high standards
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="text-center animate-slide-in-left">
+                    <div class="w-20 h-20 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-microscope text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-white mb-4">MATERIAL TESTING</h3>
+                    <p class="text-gray-300 font-rog-body">Premium fabrics tested for durability and comfort</p>
+                </div>
+
+                <div class="text-center animate-slide-up">
+                    <div class="w-20 h-20 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-eye text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-white mb-4">VISUAL INSPECTION</h3>
+                    <p class="text-gray-300 font-rog-body">Every detail checked by our quality experts</p>
+                </div>
+
+                <div class="text-center animate-slide-in-right">
+                    <div class="w-20 h-20 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-check-circle text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-white mb-4">FINAL APPROVAL</h3>
+                    <p class="text-gray-300 font-rog-body">Quality verified before packaging and shipping</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6 text-white">
+                Ready to Get Started?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto font-rog-body">
+                Join thousands of satisfied customers who trust Otomono for their premium jersey needs.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/designer-studio.html" class="inline-block bg-white text-rog-red px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg transition-all duration-300 hover:bg-gray-100 hover:scale-105">
+                    <i class="fas fa-paint-brush mr-2"></i>
+                    Start Designing
+                </a>
+                <a href="client-order-form.html" class="inline-block glass-effect px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg text-white hover:bg-white hover:text-rog-dark transition-all duration-300">
+                    <i class="fas fa-shopping-cart mr-2"></i>
+                    Place Order
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="public/logo.png" alt="Otomono Jerseys" class="h-10 w-auto">
+                    </div>
+                    <p class="text-gray-400 mb-4 font-rog-body">
+                        Creating premium custom jerseys with cutting-edge 3D design technology.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Services</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">About</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Custom Jerseys</a></li>
+                        <li><a href="3D-Jersey-Designer/designer-studio.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">3D Designer</a></li>
+                        <li><a href="client-order-form.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Order Form</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Contact</h3>
+                    <div class="space-y-2 text-gray-400 font-rog-body">
+                        <p><i class="fas fa-envelope mr-2"></i>info@otomono.mv</p>
+                        <p><i class="fas fa-phone mr-2"></i>+960 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i>Malé, Maldives</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400 font-rog-body">&copy; 2024 Otomono Jerseys. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            function openMobileMenu() {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openMobileMenu();
+                });
+            }
+
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    closeMobileMenu();
+                });
+            }
+
+            // Close menu when clicking outside
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target === mobileMenu) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Close menu when clicking on navigation links
+            mobileMenu.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Keyboard support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Admin panel functionality
+        function setupAdminPanelButtons() {
+            const adminPanelBtn = document.getElementById('admin-panel-btn');
+            const mobileAdminPanelBtn = document.getElementById('mobile-admin-panel-btn');
+
+            if (adminPanelBtn) {
+                adminPanelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'login.html';
+                });
+            }
+
+            if (mobileAdminPanelBtn) {
+                mobileAdminPanelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'login.html';
+                });
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileMenu();
+            setupAdminPanelButtons();
+            setupSmoothScrolling();
+        });
+    </script>
+</body>
+
+</html>

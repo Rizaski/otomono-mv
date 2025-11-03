@@ -1,0 +1,87 @@
+<!-- Mobile Overlay -->
+<div id="mobileOverlay" class="mobile-overlay" onclick="toggleSidebar()"></div>
+
+<!-- Header -->
+<header class="sticky top-0 left-0 right-0 z-50 glass-effect">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-4">
+                <button id="sidebar-toggle" class="md:hidden text-white hover:text-rog-red transition-colors duration-300">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-rog-red to-rog-orange rounded-lg flex items-center justify-center">
+                        <i class="fas fa-cog text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-rog-display font-bold text-white">ADMIN PANEL</h1>
+                        <p class="text-sm text-gray-400 font-rog-body">Management Dashboard</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header Actions -->
+            <div class="flex items-center space-x-4 header-actions">
+                <!-- Refresh Button -->
+                <button id="refresh-btn" class="p-2 text-white hover:text-rog-red transition-colors duration-300" title="Refresh Data">
+                    <i class="fas fa-sync-alt text-xl"></i>
+                </button>
+
+                <!-- Notifications -->
+                <div class="relative">
+                    <button id="notification-btn" class="relative p-2 text-white hover:text-rog-red transition-colors duration-300" title="Notifications">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span id="notification-count" class="absolute -top-2 -right-2 bg-rog-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center opacity-0 pointer-events-none">0</span>
+                    </button>
+                    <div id="notification-center" class="absolute right-0 mt-2 w-80 bg-rog-light rounded-lg shadow-lg border border-rog-red/30 hidden z-50">
+                        <div class="p-4 border-b border-rog-gray">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="text-lg font-rog-heading font-semibold text-white">Notifications</h3>
+                                    <p class="text-sm text-gray-400 font-rog-body">Client submissions and updates</p>
+                                </div>
+                                <button id="clear-all-notifications" class="text-xs text-rog-red hover:text-rog-orange transition-colors duration-300 font-rog-body">
+                                    <i class="fas fa-trash mr-1"></i>Clear All
+                                </button>
+                            </div>
+                        </div>
+                        <div id="notification-list" class="max-h-64 overflow-y-auto">
+                            <div class="p-4 text-center text-gray-400">No notifications</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="relative">
+                    <button id="user-profile-btn" class="w-10 h-10 bg-gradient-to-br from-rog-red to-rog-orange rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-white"></i>
+                    </button>
+                    <div id="user-dropdown" class="absolute right-0 mt-2 w-48 bg-rog-light rounded-lg shadow-lg border border-rog-red/30 hidden">
+                        <div class="p-4 border-b border-rog-gray">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <div class="w-10 h-10 bg-gradient-to-br from-rog-red to-rog-orange rounded-full flex items-center justify-center" id="admin-avatar">
+                                    <i class="fas fa-user text-white text-sm"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm text-gray-400 font-rog-body">Signed in as</p>
+                                    <p class="font-rog-heading font-semibold text-white" id="admin-name">Admin User</p>
+                                    <p class="text-xs text-gray-400 font-rog-body" id="admin-email">admin@otomono.mv</p>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-400 font-rog-body">
+                                <p>Session: <span id="session-duration">0h 0m</span></p>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <a href="#" class="block px-3 py-2 text-sm hover:bg-rog-gray rounded font-rog-body">Profile</a>
+                            <a href="admin-settings.html" class="block px-3 py-2 text-sm hover:bg-rog-gray rounded font-rog-body">Settings</a>
+                            <a href="#" onclick="showHelpDialog()" class="block px-3 py-2 text-sm hover:bg-rog-gray rounded font-rog-body">Help</a>
+                            <hr class="my-2 border-rog-gray">
+                            <a href="#" class="block px-3 py-2 text-sm hover:bg-rog-gray rounded text-rog-red font-rog-body" onclick="logout()">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

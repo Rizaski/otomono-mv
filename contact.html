@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Otomono Jerseys</title>
+    <meta name="description" content="Get in touch with Otomono Jerseys for custom jersey design and printing services. Professional support and consultation available.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="apple-touch-icon" href="public/favicon.png">
+
+    <!-- ROG Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rog-red': '#ff0037',
+                        'rog-orange': '#ff6b35',
+                        'rog-dark': '#000000',
+                        'rog-light': '#1a1a1a',
+                        'rog-gray': '#333333',
+                        'rog-blue': '#00d4ff',
+                        'rog-purple': '#8b5cf6',
+                    },
+                    fontFamily: {
+                        'rog-display': ['Orbitron', 'monospace'],
+                        'rog-heading': ['Exo 2', 'sans-serif'],
+                        'rog-body': ['Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': {
+                                opacity: '0'
+                            },
+                            '100%': {
+                                opacity: '1'
+                            },
+                        },
+                        slideUp: {
+                            '0%': {
+                                transform: 'translateY(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInLeft: {
+                            '0%': {
+                                transform: 'translateX(-30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInRight: {
+                            '0%': {
+                                transform: 'translateX(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        float: {
+                            '0%, 100%': {
+                                transform: 'translateY(0px)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
+                        },
+                        glow: {
+                            '0%': {
+                                boxShadow: '0 0 20px rgba(220, 38, 38, 0.5)'
+                            },
+                            '100%': {
+                                boxShadow: '0 0 30px rgba(220, 38, 38, 0.8)'
+                            },
+                        },
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .rog-button {
+            background: linear-gradient(135deg, #ff0037 0%, #ff6b35 50%, #00d4ff 100%);
+            transition: all 0.3s ease;
+            border: 1px solid #ff0037;
+            box-shadow: 0 0 20px rgba(255, 0, 55, 0.3);
+        }
+
+        .rog-button:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff0037 50%, #8b5cf6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 0, 55, 0.6);
+            border-color: #00d4ff;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 30%, #333333 70%, #000000 100%);
+            position: relative;
+        }
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 0, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 0, 55, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        .contact-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(255, 0, 55, 0.3), 0 0 30px rgba(0, 212, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-rog-dark text-white font-rog-body overflow-x-hidden">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="public/logo.png" alt="Otomono Jerseys" class="h-10 w-auto">
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">Home</a>
+                    <a href="services.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">Services</a>
+                    <a href="about.html" class="text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium">About</a>
+                    <a href="contact.html" class="text-rog-red font-rog-heading font-bold glow">Contact</a>
+                </nav>
+
+                <!-- Desktop Admin Panel Button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <button id="admin-panel-btn" class="rog-button px-6 py-2 rounded-lg font-rog-heading font-semibold text-white transition-all duration-300 hover:shadow-lg">
+                        <i class="fas fa-cog mr-2"></i>
+                        Admin Panel
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white hover:text-rog-red transition-colors duration-300">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-80 bg-rog-light shadow-2xl z-50 md:hidden">
+            <div class="flex items-center justify-between p-6 border-b border-rog-gray">
+                <div class="flex items-center space-x-3">
+                    <img src="public/logo.png" alt="Otomono Jerseys" class="h-8 w-auto">
+                </div>
+                <button id="mobile-menu-close" class="text-white hover:text-rog-red transition-colors duration-300">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+
+            <nav class="p-6 space-y-6">
+                <a href="index.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">Home</a>
+                <a href="services.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">Services</a>
+                <a href="about.html" class="block text-white hover:text-rog-red transition-colors duration-300 font-rog-heading font-medium text-lg">About</a>
+                <a href="contact.html" class="block text-rog-red font-rog-heading font-bold text-lg glow">Contact</a>
+
+                <!-- Mobile Admin Panel Button -->
+                <button id="mobile-admin-panel-btn" class="w-full rog-button px-6 py-3 rounded-lg font-rog-heading font-semibold text-white transition-all duration-300 hover:shadow-lg">
+                    <i class="fas fa-cog mr-2"></i>
+                    Admin Panel
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="contact" class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rog-red/5 via-transparent to-rog-blue/5"></div>
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-rog-red/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-64 h-64 bg-rog-blue/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-rog-display font-bold mb-6 animate-fade-in">
+                    Get In
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Touch
+                    </span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 animate-slide-up font-rog-body">
+                    Ready to create your perfect jerseys? Contact us today for professional consultation and support.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
+                    <a href="#contact-form" class="rog-button px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg transition-all duration-300 hover:shadow-xl">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Send Message
+                    </a>
+                    <a href="tel:+9601234567" class="glass-effect px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg text-white hover:bg-white hover:text-rog-dark transition-all duration-300">
+                        <i class="fas fa-phone mr-2"></i>
+                        Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information Section -->
+    <section class="py-20 bg-rog-light relative overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rog-red/5 via-transparent to-rog-blue/5"></div>
+        <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-rog-orange/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-rog-purple/10 rounded-full blur-3xl"></div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6">
+                    Contact
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Information
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-rog-body">
+                    Multiple ways to reach us for your jersey needs
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Phone -->
+                <div class="contact-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 text-center animate-slide-in-left">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-phone text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4">PHONE</h3>
+                    <p class="text-gray-300 mb-4 font-rog-body">Call us for immediate assistance</p>
+                    <a href="tel:+9601234567" class="text-rog-red hover:text-rog-orange transition-colors font-rog-body text-lg">+960 123-4567</a>
+                </div>
+
+                <!-- Email -->
+                <div class="contact-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 text-center animate-slide-up">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-envelope text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4">EMAIL</h3>
+                    <p class="text-gray-300 mb-4 font-rog-body">Send us your requirements</p>
+                    <a href="mailto:info@otomono.mv" class="text-rog-red hover:text-rog-orange transition-colors font-rog-body text-lg">info@otomono.mv</a>
+                </div>
+
+                <!-- Address -->
+                <div class="contact-card bg-rog-dark/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 hover:border-rog-red transition-all duration-300 text-center animate-slide-in-right">
+                    <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-rog-red">
+                        <i class="fas fa-map-marker-alt text-3xl text-rog-red"></i>
+                    </div>
+                    <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-4">ADDRESS</h3>
+                    <p class="text-gray-300 mb-4 font-rog-body">Visit our office</p>
+                    <p class="text-rog-red font-rog-body">Malé, Maldives<br>Republic of Maldives</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="py-20 bg-rog-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6">
+                    Send Us A
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Message
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-rog-body">
+                    Fill out the form below and we'll get back to you within 24 hours
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Contact Form -->
+                    <div class="bg-rog-light/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30 animate-slide-in-left">
+                        <form class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="firstName" class="block text-sm font-rog-heading font-semibold text-white mb-2">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" required class="w-full px-4 py-3 bg-rog-dark/50 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-rog-red transition-colors">
+                                </div>
+                                <div>
+                                    <label for="lastName" class="block text-sm font-rog-heading font-semibold text-white mb-2">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" required class="w-full px-4 py-3 bg-rog-dark/50 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-rog-red transition-colors">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-rog-heading font-semibold text-white mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 bg-rog-dark/50 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-rog-red transition-colors">
+                            </div>
+
+                            <div>
+                                <label for="phone" class="block text-sm font-rog-heading font-semibold text-white mb-2">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-rog-dark/50 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-rog-red transition-colors">
+                            </div>
+
+                            <div>
+                                <label for="subject" class="block text-sm font-rog-heading font-semibold text-white mb-2">Subject</label>
+                                <select id="subject" name="subject" required class="w-full px-4 py-3 bg-rog-dark/50 border border-rog-red/30 rounded-lg text-white focus:outline-none focus:border-rog-red transition-colors">
+                                    <option value="">Select a subject</option>
+                                    <option value="custom-jersey">Custom Jersey Design</option>
+                                    <option value="bulk-order">Bulk Order Inquiry</option>
+                                    <option value="pricing">Pricing Information</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-sm font-rog-heading font-semibold text-white mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 bg-rog-dark/50 border border-rog-red/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-rog-red transition-colors resize-none"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full rog-button px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg transition-all duration-300 hover:shadow-xl">
+                                <i class="fas fa-paper-plane mr-2"></i>
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="space-y-8 animate-slide-in-right">
+                        <div class="bg-rog-light/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30">
+                            <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-6">Why Choose Otomono?</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start space-x-3">
+                                    <i class="fas fa-check text-rog-red mt-1"></i>
+                                    <span class="text-gray-300 font-rog-body">Premium quality materials and printing</span>
+                                </li>
+                                <li class="flex items-start space-x-3">
+                                    <i class="fas fa-check text-rog-red mt-1"></i>
+                                    <span class="text-gray-300 font-rog-body">Fast turnaround times</span>
+                                </li>
+                                <li class="flex items-start space-x-3">
+                                    <i class="fas fa-check text-rog-red mt-1"></i>
+                                    <span class="text-gray-300 font-rog-body">Professional design consultation</span>
+                                </li>
+                                <li class="flex items-start space-x-3">
+                                    <i class="fas fa-check text-rog-red mt-1"></i>
+                                    <span class="text-gray-300 font-rog-body">Competitive pricing</span>
+                                </li>
+                                <li class="flex items-start space-x-3">
+                                    <i class="fas fa-check text-rog-red mt-1"></i>
+                                    <span class="text-gray-300 font-rog-body">24/7 customer support</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-rog-light/20 backdrop-blur-sm p-8 rounded-2xl border border-rog-red/30">
+                            <h3 class="text-2xl font-rog-heading font-bold text-rog-red mb-6">Business Hours</h3>
+                            <div class="space-y-2 text-gray-300 font-rog-body">
+                                <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
+                                <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM</p>
+                                <p><strong>Sunday:</strong> Closed</p>
+                                <p class="text-rog-red mt-4"><strong>Emergency Support:</strong> 24/7 Available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-rog-gray">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6">
+                    Frequently Asked
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue animate-glow">
+                        Questions
+                    </span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-rog-body">
+                    Common questions about our jersey design and printing services
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="bg-rog-dark/20 backdrop-blur-sm p-6 rounded-2xl border border-rog-red/30 animate-slide-in-left">
+                    <h3 class="text-xl font-rog-heading font-bold text-rog-red mb-3">How long does it take to complete an order?</h3>
+                    <p class="text-gray-300 font-rog-body">Standard orders take 5-7 business days, while bulk orders (25+ jerseys) can be completed in 3-5 days. Rush orders are available for an additional fee.</p>
+                </div>
+
+                <div class="bg-rog-dark/20 backdrop-blur-sm p-6 rounded-2xl border border-rog-red/30 animate-slide-up">
+                    <h3 class="text-xl font-rog-heading font-bold text-rog-red mb-3">What file formats do you accept for designs?</h3>
+                    <p class="text-gray-300 font-rog-body">We accept all major design formats including AI, EPS, PDF, PNG, and JPG. Vector formats (AI, EPS) are preferred for the best quality results.</p>
+                </div>
+
+                <div class="bg-rog-dark/20 backdrop-blur-sm p-6 rounded-2xl border border-rog-red/30 animate-slide-up">
+                    <h3 class="text-xl font-rog-heading font-bold text-rog-red mb-3">Do you offer design services?</h3>
+                    <p class="text-gray-300 font-rog-body">Yes! Our professional design team can create custom logos, team branding, and complete jersey designs from scratch or work with your existing concepts.</p>
+                </div>
+
+                <div class="bg-rog-dark/20 backdrop-blur-sm p-6 rounded-2xl border border-rog-red/30 animate-slide-in-right">
+                    <h3 class="text-xl font-rog-heading font-bold text-rog-red mb-3">What is your minimum order quantity?</h3>
+                    <p class="text-gray-300 font-rog-body">We have no minimum order quantity! Whether you need 1 jersey or 1000, we're happy to help with orders of any size.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-rog-red via-rog-orange to-rog-blue">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-rog-display font-bold mb-6 text-white">
+                Ready to Get Started?
+            </h2>
+            <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto font-rog-body">
+                Contact us today for a free consultation and quote on your custom jersey project.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact-form" class="inline-block bg-white text-rog-red px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg transition-all duration-300 hover:bg-gray-100 hover:scale-105">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Send Message
+                </a>
+                <a href="https://otomonodesignner.vercel.app/" class="inline-block glass-effect px-8 py-4 rounded-lg font-rog-heading font-semibold text-lg text-white hover:bg-white hover:text-rog-dark transition-all duration-300">
+                    <i class="fas fa-paint-brush mr-2"></i>
+                    Start Designing
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <img src="public/logo.png" alt="Otomono Jerseys" class="h-10 w-auto">
+                    </div>
+                    <p class="text-gray-400 mb-4 font-rog-body">
+                        Creating premium custom jerseys with cutting-edge 3D design technology.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Home</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Services</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="services.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Custom Jerseys</a></li>
+                        <li><a href="https://otomonodesignner.vercel.app" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">3D Designer</a></li>
+                        <li><a href="client-order-form.html" class="text-gray-400 hover:text-rog-red transition-colors duration-300 font-rog-body">Order Form</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-rog-heading font-semibold mb-4 text-white">Contact</h3>
+                    <div class="space-y-2 text-gray-400 font-rog-body">
+                        <p><i class="fas fa-envelope mr-2"></i>info@otomono.mv</p>
+                        <p><i class="fas fa-phone mr-2"></i>+960 123-4567</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i>Malé, Maldives</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400 font-rog-body">&copy; 2024 Otomono Jerseys. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            function openMobileMenu() {
+                mobileMenu.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openMobileMenu();
+                });
+            }
+
+            if (mobileMenuClose) {
+                mobileMenuClose.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    closeMobileMenu();
+                });
+            }
+
+            // Close menu when clicking outside
+            mobileMenu.addEventListener('click', (e) => {
+                if (e.target === mobileMenu) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Close menu when clicking on navigation links
+            mobileMenu.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Keyboard support
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Admin panel functionality
+        function setupAdminPanelButtons() {
+            const adminPanelBtn = document.getElementById('admin-panel-btn');
+            const mobileAdminPanelBtn = document.getElementById('mobile-admin-panel-btn');
+
+            if (adminPanelBtn) {
+                adminPanelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'login.html';
+                });
+            }
+
+            if (mobileAdminPanelBtn) {
+                mobileAdminPanelBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = 'login.html';
+                });
+            }
+        }
+
+        // Contact form functionality
+        function setupContactForm() {
+            const contactForm = document.querySelector('form');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Get form data
+                    const formData = new FormData(contactForm);
+                    const data = Object.fromEntries(formData);
+
+                    // Simple validation
+                    if (!data.firstName || !data.lastName || !data.email || !data.subject || !data.message) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+
+                    // Simulate form submission
+                    const submitBtn = contactForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending...';
+                    submitBtn.disabled = true;
+
+                    setTimeout(() => {
+                        alert('Thank you for your message! We will get back to you within 24 hours.');
+                        contactForm.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
+                });
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Initialize all functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileMenu();
+            setupAdminPanelButtons();
+            setupContactForm();
+            setupSmoothScrolling();
+        });
+    </script>
+</body>
+
+</html>

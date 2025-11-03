@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - Otomono Jerseys</title>
+    <meta name="description" content="Customer dashboard for Otomono Jerseys - Manage your orders and design custom jerseys">
+    <meta name="author" content="Otomono Jerseys">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Firebase Configuration Files -->
+    <script src="firebase-env-config.js"></script>
+    <script src="firebase-simple-config.js"></script>
+    <script src="firebase-robust-config.js"></script>
+
+    <!-- Global Firebase Authentication -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/firebase-auth-wrapper.js"></script>
+
+    <!-- Global Login Handler - Force redirect to login page -->
+    <script src="js/global-login.js"></script>
+
+    <!-- Global Firebase Database -->
+    <script src="js/firebase-database.js"></script>
+
+    <!-- Improved Authentication Handler -->
+    <script src="js/improved-auth-handler.js"></script>
+    
+    <!-- Profile Photo Handler -->
+    <script src="js/profile-photo-handler.js"></script>
+    
+    <!-- Universal Authentication Fix -->
+    <script src="js/universal-auth-fix.js"></script>
+    
+    <!-- Deployed Authentication Fix -->
+    <script src="js/deployed-auth-fix.js"></script>
+    
+    <!-- Gmail Profile Photo Fix -->
+    <script src="js/gmail-profile-photo-fix.js"></script>
+    
+    <!-- Aggressive Gmail Fix -->
+    <script src="js/aggressive-gmail-fix.js"></script>
+    
+    <!-- BULLETPROOF Gmail Fix -->
+    <script src="js/bulletproof-gmail-fix.js"></script>
+    
+    <!-- ULTIMATE Gmail Fix -->
+    <script src="js/ultimate-gmail-fix.js"></script>
+    
+    <!-- FINAL Gmail Fix -->
+    <script src="js/final-gmail-fix.js"></script>
+    
+    <!-- Smooth Auth Handler -->
+    <script src="js/smooth-auth-handler.js"></script>
+    
+    <!-- User Icon Fix -->
+    <script src="js/user-icon-fix.js"></script>
+    
+    <!-- Smooth Profile Fix -->
+    <script src="js/smooth-profile-fix.js"></script>
+    
+    <!-- Stop Loading CSS Fix -->
+    <script src="js/stop-loading-css.js"></script>
+    
+    <!-- Simple User Icon -->
+    <script src="js/simple-user-icon.js"></script>
+    
+    <!-- Simple User Icon CSS -->
+    <script src="js/simple-user-icon-css.js"></script>
+    
+    <!-- Clean Gmail Profile -->
+    <script src="js/clean-gmail-profile.js"></script>
+    
+    <!-- Clean Profile CSS -->
+    <script src="js/clean-profile-css.js"></script>
+    
+    <!-- ABSOLUTE FINAL FIX -->
+    <script src="js/ABSOLUTE-FINAL-FIX.js"></script>
+    
+    <!-- ABSOLUTE FINAL CSS -->
+    <script src="js/ABSOLUTE-FINAL-CSS.js"></script>
+    
+    <!-- SIGNOUT DROPDOWN FIX -->
+    <script src="js/SIGNOUT-DROPDOWN-FIX.js"></script>
+    
+    <!-- GMAIL USER INFO FIX -->
+    <script src="js/GMAIL-USER-INFO-FIX.js"></script>
+    
+    <!-- REDESIGNED GMAIL LOGIN -->
+    <script src="js/REDESIGNED-GMAIL-LOGIN.js"></script>
+    
+    <!-- REDESIGNED GMAIL LOGIN CSS -->
+    <script src="js/REDESIGNED-GMAIL-LOGIN-CSS.js"></script>
+    
+    <!-- BULLETPROOF GMAIL LOGIN -->
+    <script src="js/BULLETPROOF-GMAIL-LOGIN.js"></script>
+    
+    <!-- BULLETPROOF GMAIL LOGIN CSS -->
+    <script src="js/BULLETPROOF-GMAIL-LOGIN-CSS.js"></script>
+    
+    <!-- STOP CONSTANT LOADING -->
+    <script src="js/STOP-CONSTANT-LOADING.js"></script>
+    
+    <!-- STATIC PROFILE CSS -->
+    <script src="js/STATIC-PROFILE-CSS.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ff0040',
+                        secondary: '#1a1a1a',
+                        accent: '#ff0040',
+                        'rog-red': '#ff0040',
+                        'rog-dark': '#0a0a0a',
+                        'rog-gray': '#1a1a1a',
+                        'rog-light': '#1a1a1a',
+                    },
+                    fontFamily: {
+                        'rog-heading': ['Orbitron', 'sans-serif'],
+                        'rog-body': ['Inter', 'sans-serif'],
+                        'rog-display': ['Orbitron', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        p,
+        span,
+        div,
+        a,
+        li {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .rog-heading {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .rog-body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .rog-display {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 0, 64, 0.5);
+        }
+
+        .hover\:glow:hover {
+            text-shadow: 0 0 15px rgba(255, 0, 64, 0.7);
+        }
+
+        .rog-button {
+            background: linear-gradient(135deg, #ff0040, #dc143c);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 0, 64, 0.3);
+        }
+
+        .rog-button:hover {
+            background: linear-gradient(135deg, #dc143c, #b91c3c);
+            box-shadow: 0 6px 20px rgba(255, 0, 64, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .floating-label {
+            position: relative;
+        }
+
+        .floating-label input {
+            padding-top: 1.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .floating-label label {
+            position: absolute;
+            top: 0.75rem;
+            left: 1rem;
+            transition: all 0.2s ease;
+            pointer-events: none;
+            color: #9ca3af;
+        }
+
+        .floating-label input:focus+label,
+        .floating-label input:not(:placeholder-shown)+label {
+            top: 0.25rem;
+            font-size: 0.75rem;
+            color: #ff0040;
+        }
+
+        .form-input {
+            background-color: #1a1a1a;
+            border: 1px solid #374151;
+            color: white;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #ff0040;
+            box-shadow: 0 0 0 3px rgba(255, 0, 64, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #6b7280;
+        }
+
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 0, 64, 0.3);
+        }
+
+        .order-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(10, 10, 10, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 64, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .order-card:hover {
+            border-color: rgba(255, 0, 64, 0.5);
+            box-shadow: 0 8px 25px rgba(255, 0, 64, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status-pending {
+            background-color: rgba(251, 191, 36, 0.1);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .status-processing {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .status-shipped {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-delivered {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-cancelled {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-rog-dark text-white">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-rog-dark/95 backdrop-blur-sm border-b border-rog-red shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <img src="public/logo-white.png" alt="Otomono Logo" class="h-8 w-auto" />
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-rog-red transition-colors font-rog-heading hover:glow">Home</a>
+                    <a href="services.html" class="text-gray-300 hover:text-rog-red transition-colors font-rog-heading hover:glow">Services</a>
+                    <a href="about.html" class="text-gray-300 hover:text-rog-red transition-colors font-rog-heading hover:glow">About</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-rog-red transition-colors font-rog-heading hover:glow">Contact</a>
+                    <a href="customer.html" class="text-rog-red border-b-2 border-rog-red pb-2 glow font-rog-heading">Dashboard</a>
+                    <a href="designer-studio.html" class="text-rog-red border-b-2 border-rog-red pb-2 glow font-rog-heading">Design Studio</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-rog-light hover:bg-rog-red transition-all duration-200 group relative border border-rog-red">
+                    <svg class="w-5 h-5 text-white group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <!-- User Actions -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <!-- User Profile Icon with Dropdown -->
+                    <div class="relative group">
+                        <button id="user-profile-btn" class="flex items-center space-x-2 p-2 rounded-lg bg-rog-light/20 backdrop-blur-sm border border-rog-red/30 hover:bg-rog-red/20 transition-all duration-300 hover:border-rog-red">
+                            <img id="user-profile-image" src="" alt="Profile" class="w-6 h-6 rounded-full border border-rog-red/30 object-cover">
+                            <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <!-- Profile Dropdown -->
+                        <div id="user-profile-dropdown" class="absolute top-full right-0 mt-2 w-56 bg-rog-dark rounded-lg shadow-lg border border-rog-red/30 z-50 hidden">
+                            <div class="py-2">
+                                <div class="px-4 py-3 text-sm text-gray-300 border-b border-rog-red/30">
+                                    <div class="flex items-center space-x-3">
+                                        <img id="dropdown-profile-image" src="" alt="Profile" class="w-8 h-8 rounded-full border border-rog-red/30 object-cover">
+                                        <div>
+                                            <div class="font-rog-heading font-semibold text-white" id="dropdown-user-name">User</div>
+                                            <div class="text-gray-400 font-rog-body text-xs" id="dropdown-user-email">user@example.com</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="customer.html" class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-rog-red/20 transition-colors font-rog-body">
+                                    <svg class="w-4 h-4 mr-3 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    Customer Dashboard
+                                </a>
+                                <a href="designer-studio.html" class="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-rog-red/20 transition-colors font-rog-body">
+                                    <svg class="w-4 h-4 mr-3 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    Jersey Designer Studio
+                                </a>
+                                <div class="border-t border-rog-red/30 my-2"></div>
+                                <button id="sign-out-btn" class="flex items-center w-full px-4 py-3 text-sm text-rog-red hover:bg-rog-red/20 transition-colors font-rog-body">
+                                    <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                    Sign Out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <!-- Floating Chat Button -->
+        <button id="floating-chat-btn" class="fixed bottom-6 right-6 w-14 h-14 bg-rog-red rounded-full shadow-lg hover:bg-rog-red/90 transition-all duration-200 z-40 flex items-center justify-center group md:hidden">
+            <i class="fas fa-comments text-white text-xl group-hover:scale-110 transition-transform"></i>
+        </button>
+
+        <!-- Customer Chat Modal -->
+        <div id="customer-chat-modal" class="fixed inset-0 z-50 bg-black bg-opacity-75 hidden">
+            <div class="fixed bottom-4 right-4 w-80 bg-rog-dark rounded-lg shadow-2xl border border-rog-red/30">
+                <div class="flex flex-col h-96">
+                    <!-- Chat Header -->
+                    <div class="flex items-center justify-between p-4 border-b border-rog-red/30 bg-rog-dark rounded-t-lg">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <h3 class="text-lg font-semibold text-white">Customer Support</h3>
+                        </div>
+                        <button id="close-chat-modal" class="p-1 rounded hover:bg-rog-red/20 transition-colors">
+                            <svg class="w-5 h-5 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Customer Info Form -->
+                    <div id="customer-info-form" class="p-4 space-y-4">
+                        <h4 class="text-white font-semibold mb-3">Please provide your details to start chatting:</h4>
+                        <input type="text" id="customer-name" placeholder="Full Name" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-rog-red focus:outline-none">
+                        <input type="email" id="customer-email" placeholder="Email Address" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-rog-red focus:outline-none">
+                        <input type="tel" id="customer-phone" placeholder="Mobile Number" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-rog-red focus:outline-none">
+                        <button id="start-chat-btn" class="w-full bg-rog-red text-white py-2 px-4 rounded-lg hover:bg-rog-red/90 transition-colors">
+                            Start Chat
+                        </button>
+                    </div>
+
+                    <!-- Chat Interface -->
+                    <div id="chat-interface" class="hidden flex-1 flex flex-col">
+                        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-2">
+                            <div class="text-center text-gray-400 text-sm">
+                                <p>Connected to support team</p>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-rog-red/30">
+                            <div class="flex space-x-2">
+                                <input type="text" id="chat-message-input" placeholder="Type your message..." class="flex-1 px-3 py-2 bg-gray-800 text-white rounded-lg border border-gray-600 focus:border-rog-red focus:outline-none">
+                                <button id="send-message-btn" class="bg-rog-red text-white px-4 py-2 rounded-lg hover:bg-rog-red/90 transition-colors">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="fixed inset-0 z-50 bg-black bg-opacity-75 hidden md:hidden">
+            <div class="fixed top-0 right-0 h-full w-80 bg-rog-dark shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out border-l border-rog-red/30">
+                <div class="flex flex-col h-full">
+                    <div class="flex items-center justify-between p-6 border-b border-rog-red/30 bg-rog-dark">
+                        <img src="public/logo-white.png" alt="Otomono Logo" class="h-8 w-auto" />
+                        <button id="mobile-menu-close" class="p-2 rounded-lg hover:bg-rog-red/20 transition-colors border border-rog-red/30">
+                            <svg class="w-6 h-6 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <nav class="flex-1 px-6 py-8 bg-rog-dark">
+                        <div class="space-y-6">
+                            <a href="index.html" class="block text-xl font-rog-heading font-semibold text-white hover:text-rog-red transition-colors py-2 border-b border-rog-red/20 hover:border-rog-red">Home</a>
+                            <a href="services.html" class="block text-xl font-rog-heading font-semibold text-white hover:text-rog-red transition-colors py-2 border-b border-rog-red/20 hover:border-rog-red">Services</a>
+                            <a href="about.html" class="block text-xl font-rog-heading font-semibold text-white hover:text-rog-red transition-colors py-2 border-b border-rog-red/20 hover:border-rog-red">About</a>
+                            <a href="contact.html" class="block text-xl font-rog-heading font-semibold text-white hover:text-rog-red transition-colors py-2 border-b border-rog-red/20 hover:border-rog-red">Contact</a>
+                            <a href="customer.html" class="block text-xl font-rog-heading font-semibold text-rog-red border-b-2 border-rog-red pb-2 glow">Dashboard</a>
+                            <a href="designer-studio.html" class="block text-xl font-rog-heading font-semibold text-rog-red border-b-2 border-rog-red pb-2 glow">Design Studio</a>
+                        </div>
+                        <div class="mt-8 pt-8 border-t border-rog-red/30 space-y-4">
+                            <!-- Mobile User Profile -->
+                            <div class="flex items-center space-x-3 p-4 bg-rog-light/20 backdrop-blur-sm rounded-lg border border-rog-red/30">
+                                <img id="mobile-user-profile-image" src="" alt="Profile" class="w-10 h-10 rounded-full border border-rog-red/30 object-cover">
+                                <div>
+                                    <p class="text-sm font-rog-heading font-semibold text-white" id="mobile-user-name">User Name</p>
+                                    <p class="text-xs text-gray-400 font-rog-body" id="mobile-user-email">user@example.com</p>
+                                </div>
+                            </div>
+
+                            <!-- Mobile Navigation Links -->
+                            <div class="space-y-2">
+                                <a href="customer.html" class="flex items-center px-3 py-2 text-sm text-gray-300 hover:bg-rog-red/20 transition-colors font-rog-body rounded-lg">
+                                    <svg class="w-4 h-4 mr-3 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                    Customer Dashboard
+                                </a>
+                                <a href="designer-studio.html" class="flex items-center px-3 py-2 text-sm text-gray-300 hover:bg-rog-red/20 transition-colors font-rog-body rounded-lg">
+                                    <svg class="w-4 h-4 mr-3 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    Jersey Designer Studio
+                                </a>
+                            </div>
+
+                            <!-- Mobile Sign Out -->
+                            <button id="mobile-sign-out" class="w-full flex items-center justify-center px-4 py-3 bg-rog-light/20 backdrop-blur-sm rounded-lg hover:bg-rog-red/20 transition-all duration-300 border border-rog-red/30 hover:border-rog-red">
+                                <svg class="w-5 h-5 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                <span class="text-white font-rog-heading font-medium">Sign Out</span>
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-screen bg-gray-50">
+        <!-- Dashboard Header -->
+        <section class="bg-white border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-3xl font-rog-display font-bold text-gray-900">Customer Dashboard</h1>
+                        <p class="text-gray-600 font-rog-body mt-2">Welcome back! Manage your orders and design custom jerseys.</p>
+                    </div>
+                    <a href="designer-studio.html" class="rog-button">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Design New Jersey
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Content -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Order History -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h2 class="text-xl font-rog-display font-bold text-gray-900">Order History</h2>
+                            <p class="text-gray-600 font-rog-body text-sm mt-1">Track your jersey orders and their status</p>
+                        </div>
+                        <div class="p-6">
+                            <!-- Order Cards -->
+                            <div class="space-y-4" id="orders-container">
+                                <!-- Loading state -->
+                                <div id="orders-loading" class="text-center py-8">
+                                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-rog-red"></div>
+                                    <p class="text-gray-400 font-rog-body mt-2">Loading orders...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions & Stats -->
+                <div class="space-y-6">
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-rog-display font-bold text-gray-900">Quick Actions</h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <a href="designer-studio.html" class="flex items-center p-4 bg-rog-red/10 rounded-lg hover:bg-rog-red/20 transition-colors group">
+                                <div class="w-10 h-10 bg-rog-red rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-rog-heading font-semibold text-gray-900">Design Jersey</p>
+                                    <p class="text-sm text-gray-600 font-rog-body">Create custom jerseys</p>
+                                </div>
+                            </a>
+
+                            <a href="contact.html" class="flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors group">
+                                <div class="w-10 h-10 bg-gray-600 rounded-lg flex items-center justify-center mr-4 group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-rog-heading font-semibold text-gray-900">Get Support</p>
+                                    <p class="text-sm text-gray-600 font-rog-body">Contact our team</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Account Stats -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-rog-display font-bold text-gray-900">Account Stats</h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 font-rog-body">Total Orders</span>
+                                <span class="text-2xl font-rog-display font-bold text-rog-red" id="total-orders">0</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 font-rog-body">Total Spent</span>
+                                <span class="text-2xl font-rog-display font-bold text-rog-red" id="total-spent">$0</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-600 font-rog-body">Jerseys Designed</span>
+                                <span class="text-2xl font-rog-display font-bold text-rog-red" id="jerseys-designed">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Designs -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                        <div class="px-6 py-4 border-b border-gray-200">
+                            <h3 class="text-lg font-rog-display font-bold text-gray-900">Recent Designs</h3>
+                        </div>
+                        <div class="p-6">
+                            <div id="designs-container">
+                                <!-- Loading state -->
+                                <div id="designs-loading" class="text-center py-4">
+                                    <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-rog-red"></div>
+                                    <p class="text-gray-400 font-rog-body mt-2 text-sm">Loading designs...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Authentication check with persistent session
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                // Wait for Firebase to initialize and restore auth state
+                await new Promise(resolve => {
+                    const checkAuth = () => {
+                        if (window.FirebaseAuth && window.FirebaseAuth.getCurrentUser) {
+                            resolve();
+                        } else {
+                            setTimeout(checkAuth, 100);
+                        }
+                    };
+                    checkAuth();
+                });
+
+                // Wait a bit for authentication to be processed
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                // Check localStorage first
+                const storedUser = localStorage.getItem('user');
+                console.log('Stored user data:', storedUser);
+
+                // Restore authentication state (persistent login)
+                const user = await window.FirebaseAuth.restoreAuthState();
+                console.log('Restored user:', user);
+
+                if (!user) {
+                    console.log('No authenticated user, redirecting to home page');
+                    window.location.href = 'index.html';
+                    return;
+                }
+
+                console.log('User authenticated:', user.email);
+
+                // Update user information in header
+                console.log('Updating user info in customer dashboard...');
+                updateUserInfo(user);
+
+                // Load user data from Firebase
+                console.log('Loading user data from Firebase...');
+                await loadUserData(user.uid);
+
+                // Mobile menu functionality
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const mobileMenuClose = document.getElementById('mobile-menu-close');
+                const mobileSignOut = document.getElementById('mobile-sign-out');
+
+                console.log('Customer page - Mobile menu elements:', {
+                    button: mobileMenuBtn,
+                    menu: mobileMenu,
+                    close: mobileMenuClose
+                });
+
+                if (mobileMenuBtn && mobileMenu) {
+                    mobileMenuBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Customer page - Mobile menu button clicked');
+
+                        mobileMenu.classList.remove('hidden');
+                        setTimeout(() => {
+                            const transformElement = mobileMenu.querySelector('.transform');
+                            if (transformElement) {
+                                transformElement.classList.remove('translate-x-full');
+                            }
+                        }, 10);
+                        document.body.style.overflow = 'hidden';
+                        console.log('Customer page - Mobile menu opened');
+                    });
+                } else {
+                    console.error('Customer page - Mobile menu elements not found');
+                }
+
+                if (mobileMenuClose && mobileMenu) {
+                    mobileMenuClose.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Customer page - Mobile menu close clicked');
+
+                        const transformElement = mobileMenu.querySelector('.transform');
+                        if (transformElement) {
+                            transformElement.classList.add('translate-x-full');
+                        }
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                        }, 300);
+                        document.body.style.overflow = '';
+                        console.log('Customer page - Mobile menu closed');
+                    });
+                }
+
+                // Close mobile menu when clicking outside
+                if (mobileMenu) {
+                    mobileMenu.addEventListener('click', (e) => {
+                        if (e.target === mobileMenu) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    });
+                }
+
+                // Mobile sign out
+                if (mobileSignOut) {
+                    console.log('Adding mobile sign-out event listener');
+                    mobileSignOut.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Mobile sign out button clicked');
+                        try {
+                            await window.FirebaseAuth.signOut();
+                            console.log('Mobile sign out successful, redirecting...');
+                            window.location.href = 'index.html';
+                        } catch (error) {
+                            console.error('Mobile sign out error:', error);
+                        }
+                    });
+                } else {
+                    console.error('Mobile sign out button not found');
+                }
+
+                // Profile dropdown functionality
+                const userProfileBtn = document.getElementById('user-profile-btn');
+                const userProfileDropdown = document.getElementById('user-profile-dropdown');
+
+                if (userProfileBtn && userProfileDropdown) {
+                    console.log('Adding profile dropdown event listener');
+                    userProfileBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Profile button clicked, toggling dropdown');
+
+                        // Toggle dropdown visibility
+                        if (userProfileDropdown.classList.contains('hidden')) {
+                            userProfileDropdown.classList.remove('hidden');
+                            console.log('Dropdown opened');
+                        } else {
+                            userProfileDropdown.classList.add('hidden');
+                            console.log('Dropdown closed');
+                        }
+                    });
+
+                    // Close dropdown when clicking outside
+                    document.addEventListener('click', (e) => {
+                        if (!userProfileBtn.contains(e.target) && !userProfileDropdown.contains(e.target)) {
+                            if (!userProfileDropdown.classList.contains('hidden')) {
+                                userProfileDropdown.classList.add('hidden');
+                                console.log('Dropdown closed by outside click');
+                            }
+                        }
+                    });
+                } else {
+                    console.error('Profile dropdown elements not found');
+                    console.log('userProfileBtn:', userProfileBtn);
+                    console.log('userProfileDropdown:', userProfileDropdown);
+                }
+
+                // Sign out functionality
+                const signOutBtn = document.getElementById('sign-out-btn');
+                if (signOutBtn) {
+                    console.log('Adding sign-out event listener');
+                    signOutBtn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('Sign out button clicked');
+                        try {
+                            await window.FirebaseAuth.signOut();
+                            console.log('Sign out successful, redirecting...');
+                            window.location.href = 'index.html';
+                        } catch (error) {
+                            console.error('Sign out error:', error);
+                        }
+                    });
+                } else {
+                    console.error('Sign out button not found');
+                }
+            } catch (error) {
+                console.error('Error initializing customer dashboard:', error);
+                // Redirect to home page if there's an error
+                window.location.href = 'index.html';
+            }
+        });
+
+        async function updateUserInfo(user) {
+            console.log('updateUserInfo called with user:', user);
+
+            const userProfileImage = document.getElementById('user-profile-image');
+            const mobileUserName = document.getElementById('mobile-user-name');
+            const mobileUserEmail = document.getElementById('mobile-user-email');
+            const mobileUserProfileImage = document.getElementById('mobile-user-profile-image');
+
+            // Dropdown elements
+            const dropdownProfileImage = document.getElementById('dropdown-profile-image');
+            const dropdownUserName = document.getElementById('dropdown-user-name');
+            const dropdownUserEmail = document.getElementById('dropdown-user-email');
+
+            console.log('Profile elements found:');
+            console.log('userProfileImage:', userProfileImage);
+            console.log('dropdownProfileImage:', dropdownProfileImage);
+            console.log('mobileUserProfileImage:', mobileUserProfileImage);
+            console.log('dropdownUserName:', dropdownUserName);
+            console.log('dropdownUserEmail:', dropdownUserEmail);
+
+            console.log('Updating user info with:', user);
+            console.log('User photoURL:', user.photoURL);
+            console.log('User displayName:', user.displayName);
+            console.log('User email:', user.email);
+
+            // Update profile images - use actual photoURL if available
+            let profileImage = user.photoURL;
+            if (!profileImage) {
+                // Create a fallback image with user's initial
+                const initial = (user.displayName || user.email || 'U').charAt(0).toUpperCase();
+                profileImage = `https://via.placeholder.com/32/ff0040/ffffff?text=${initial}`;
+            }
+
+            console.log('Final profile image URL:', profileImage);
+
+            // Ensure we have a valid user object
+            if (!user) {
+                console.error('No user data provided to updateUserInfo');
+                return;
+            }
+
+            if (userProfileImage) {
+                userProfileImage.src = profileImage;
+                userProfileImage.onerror = () => {
+                    console.log('Profile image failed to load, using fallback');
+                    const initial = (user.displayName || user.email || 'U').charAt(0).toUpperCase();
+                    userProfileImage.src = `https://via.placeholder.com/32/ff0040/ffffff?text=${initial}`;
+                };
+                userProfileImage.onload = () => {
+                    console.log('Desktop profile image loaded successfully');
+                };
+                console.log('Updated desktop profile image:', profileImage);
+            }
+
+            if (dropdownProfileImage) {
+                dropdownProfileImage.src = profileImage;
+                dropdownProfileImage.onerror = () => {
+                    console.log('Dropdown profile image failed to load, using fallback');
+                    const initial = (user.displayName || user.email || 'U').charAt(0).toUpperCase();
+                    dropdownProfileImage.src = `https://via.placeholder.com/40/ff0040/ffffff?text=${initial}`;
+                };
+                dropdownProfileImage.onload = () => {
+                    console.log('Dropdown profile image loaded successfully');
+                };
+                console.log('Updated dropdown profile image:', profileImage);
+            }
+
+            if (mobileUserProfileImage) {
+                mobileUserProfileImage.src = profileImage;
+                mobileUserProfileImage.onerror = () => {
+                    console.log('Mobile profile image failed to load, using fallback');
+                    const initial = (user.displayName || user.email || 'U').charAt(0).toUpperCase();
+                    mobileUserProfileImage.src = `https://via.placeholder.com/40/ff0040/ffffff?text=${initial}`;
+                };
+                mobileUserProfileImage.onload = () => {
+                    console.log('Mobile profile image loaded successfully');
+                };
+                console.log('Updated mobile profile image:', profileImage);
+            }
+
+            // Update user names and emails
+            const displayName = user.displayName || (user.email ? user.email.split('@')[0] : 'User');
+            const email = user.email || 'user@example.com';
+
+            if (mobileUserName) {
+                mobileUserName.textContent = displayName;
+            }
+            if (mobileUserEmail) {
+                mobileUserEmail.textContent = email;
+            }
+            if (dropdownUserName) {
+                dropdownUserName.textContent = displayName;
+            }
+            if (dropdownUserEmail) {
+                dropdownUserEmail.textContent = email;
+            }
+        }
+
+        async function loadUserData(uid) {
+            if (!window.FirebaseDB) {
+                console.error('FirebaseDB not available');
+                return;
+            }
+
+            try {
+                // Load user profile data
+                const userProfile = await window.FirebaseDB.getUserProfile(uid);
+                if (userProfile) {
+                    updateUserStats(userProfile);
+                } else {
+                    // Create initial profile if it doesn't exist
+                    await window.FirebaseDB.createUserProfile({
+                        uid: uid,
+                        displayName: window.FirebaseAuth.getCurrentUser() ? window.FirebaseAuth.getCurrentUser().displayName : 'User',
+                        email: window.FirebaseAuth.getCurrentUser() ? window.FirebaseAuth.getCurrentUser().email : 'user@example.com'
+                    });
+                }
+
+                // Load user orders
+                await loadUserOrders(uid);
+
+                // Load user designs
+                await loadUserDesigns(uid);
+
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+
+        function updateUserStats(profile) {
+            const totalOrdersEl = document.getElementById('total-orders');
+            const totalSpentEl = document.getElementById('total-spent');
+            const jerseysDesignedEl = document.getElementById('jerseys-designed');
+
+            if (totalOrdersEl) {
+                totalOrdersEl.textContent = profile.totalOrders || 0;
+            }
+            if (totalSpentEl) {
+                totalSpentEl.textContent = `$${profile.totalSpent || 0}`;
+            }
+            if (jerseysDesignedEl) {
+                jerseysDesignedEl.textContent = profile.jerseysDesigned || 0;
+            }
+        }
+
+        async function loadUserOrders(uid) {
+            if (!window.FirebaseDB) {
+                console.error('FirebaseDB not available');
+                return;
+            }
+
+            try {
+                // Hide loading spinner
+                const loadingEl = document.getElementById('orders-loading');
+                if (loadingEl) {
+                    loadingEl.style.display = 'none';
+                }
+
+                const orders = await window.FirebaseDB.getUserOrders(uid);
+                displayOrders(orders);
+            } catch (error) {
+                console.error('Error loading user orders:', error);
+                // Show error state
+                const ordersContainer = document.getElementById('orders-container');
+                if (ordersContainer) {
+                    ordersContainer.innerHTML = `
+                        <div class="text-center py-8">
+                            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500">
+                                <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-rog-heading font-semibold text-white mb-2">Error Loading Orders</h3>
+                            <p class="text-gray-400 font-rog-body">There was an error loading your orders. Please try refreshing the page.</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function displayOrders(orders) {
+            const ordersContainer = document.getElementById('orders-container');
+            if (!ordersContainer) return;
+
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="w-16 h-16 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-rog-red">
+                            <svg class="w-8 h-8 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-rog-heading font-semibold text-white mb-2">No Orders Yet</h3>
+                        <p class="text-gray-400 font-rog-body">Your order history will appear here once you place your first order.</p>
+                        <a href="designer-studio.html" class="inline-block mt-4 rog-button">
+                            Start Designing
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            ordersContainer.innerHTML = orders.map(order => `
+                <div class="order-card rounded-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-rog-heading font-semibold text-white">${order.title || 'Custom Jersey Order'}</h3>
+                            <p class="text-gray-400 font-rog-body text-sm">Order #${order.orderId || order.id}</p>
+                        </div>
+                        <span class="status-badge ${
+                            order.status === 'completed' ? 'status-delivered' :
+                            order.status === 'shipped' ? 'status-shipped' :
+                            order.status === 'processing' ? 'status-processing' :
+                            order.status === 'pending' ? 'status-pending' :
+                            'status-cancelled'
+                        }">${order.status || 'pending'}</span>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <p class="text-sm text-gray-400 font-rog-body">Quantity</p>
+                            <p class="text-white font-rog-heading font-semibold">${order.quantity || order.items?.length || 1} ${order.quantity > 1 ? 'Jerseys' : 'Jersey'}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 font-rog-body">Total</p>
+                            <p class="text-white font-rog-heading font-semibold">$${order.totalAmount || order.total || '0.00'}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 font-rog-body">Order Date</p>
+                            <p class="text-white font-rog-heading font-semibold">${new Date(order.createdAt || order.orderDate).toLocaleDateString()}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 ${
+                                order.status === 'completed' ? 'bg-green-500' :
+                                order.status === 'shipped' ? 'bg-green-500' :
+                                order.status === 'processing' ? 'bg-blue-500 animate-pulse' :
+                                'bg-gray-500'
+                            } rounded-full"></div>
+                            <span class="text-sm text-gray-400 font-rog-body">
+                                ${order.status === 'completed' ? `Delivered on ${new Date(order.deliveredAt || order.updatedAt).toLocaleDateString()}` :
+                                  order.status === 'shipped' ? `Shipped on ${new Date(order.shippedAt || order.updatedAt).toLocaleDateString()}` :
+                                  order.status === 'processing' ? `Expected delivery: ${new Date(order.expectedDelivery || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)).toLocaleDateString()}` :
+                                  'Processing order...'}
+                            </span>
+                        </div>
+                        <button class="text-rog-red hover:text-red-400 transition-colors font-rog-heading text-sm" onclick="viewOrderDetails('${order.id || order.orderId}')">
+                            ${order.status === 'shipped' ? 'Track Package' : 'View Details'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function loadUserDesigns(uid) {
+            if (!window.FirebaseDB) {
+                console.error('FirebaseDB not available');
+                return;
+            }
+
+            try {
+                // Hide loading spinner
+                const loadingEl = document.getElementById('designs-loading');
+                if (loadingEl) {
+                    loadingEl.style.display = 'none';
+                }
+
+                const designs = await window.FirebaseDB.getUserDesigns(uid);
+                displayDesigns(designs);
+            } catch (error) {
+                console.error('Error loading user designs:', error);
+                // Show error state
+                const designsContainer = document.getElementById('designs-container');
+                if (designsContainer) {
+                    designsContainer.innerHTML = `
+                        <div class="text-center py-4">
+                            <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-2 border border-red-500">
+                                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                </svg>
+                            </div>
+                            <p class="text-gray-400 font-rog-body text-sm">Error loading designs</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        function displayDesigns(designs) {
+            const designsContainer = document.getElementById('designs-container');
+            if (!designsContainer) return;
+
+            if (designs.length === 0) {
+                designsContainer.innerHTML = `
+                    <div class="text-center py-4">
+                        <div class="w-12 h-12 bg-rog-red/20 rounded-full flex items-center justify-center mx-auto mb-2 border border-rog-red">
+                            <svg class="w-6 h-6 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-sm font-rog-heading font-semibold text-white mb-1">No Designs Yet</h3>
+                        <p class="text-gray-400 font-rog-body text-xs">Create your first design to get started</p>
+                        <a href="designer-studio.html" class="inline-block mt-2 px-3 py-1 bg-rog-red text-white rounded text-xs font-rog-heading hover:bg-rog-red/80 transition-colors">
+                            Start Designing
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Show only recent designs (limit to 3)
+            const recentDesigns = designs.slice(0, 3);
+
+            designsContainer.innerHTML = recentDesigns.map(design => `
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-200 hover:border-rog-red transition-all duration-300">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <h4 class="text-sm font-rog-heading font-semibold text-gray-900">${design.name || 'Untitled Design'}</h4>
+                            <p class="text-xs text-gray-500 font-rog-body">${new Date(design.createdAt).toLocaleDateString()}</p>
+                        </div>
+                        <div class="flex space-x-1">
+                            <button onclick="editDesign('${design.id}')" class="px-2 py-1 bg-rog-red/10 text-rog-red rounded text-xs font-rog-heading hover:bg-rog-red hover:text-white transition-all duration-300">
+                                Edit
+                            </button>
+                            <button onclick="downloadDesign('${design.id}')" class="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs font-rog-heading hover:bg-gray-300 transition-all duration-300">
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between text-xs">
+                        <span class="text-gray-500 font-rog-body">${design.type || 'Custom Jersey'}</span>
+                        <span class="text-rog-red font-rog-heading font-semibold">${design.isPublic ? 'Public' : 'Private'}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            // Add "View All" link if there are more designs
+            if (designs.length > 3) {
+                designsContainer.innerHTML += `
+                    <div class="text-center mt-3">
+                        <a href="#" onclick="viewAllDesigns()" class="text-rog-red hover:text-rog-red/80 text-xs font-rog-heading">
+                            View All ${designs.length} Designs
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        // Design management functions
+        function editDesign(designId) {
+            window.location.href = `designer-studio.html?edit=${designId}`;
+        }
+
+        function downloadDesign(designId) {
+            // Implement design download functionality
+            console.log('Downloading design:', designId);
+            // This would trigger the download of the design file
+            alert('Design download functionality will be implemented');
+        }
+
+        function viewAllDesigns() {
+            // Navigate to a designs page or show all designs in a modal
+            console.log('Viewing all designs');
+            alert('View all designs functionality will be implemented');
+        }
+
+        function viewOrderDetails(orderId) {
+            // Show order details in a modal or navigate to order details page
+            console.log('Viewing order details:', orderId);
+            alert(`Order details for ${orderId} will be shown`);
+        }
+
+        // Listen for authentication state changes
+        if (window.FirebaseAuth) {
+            window.FirebaseAuth.onAuthStateChanged((user) => {
+                if (!user) {
+                    window.location.href = 'index.html';
+                } else {
+                    updateUserInfo(user);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

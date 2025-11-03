@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details - Otomono Jerseys</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="apple-touch-icon" href="public/favicon.png">
+    <link rel="shortcut icon" href="public/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a2d5b6d90d.js" crossorigin="anonymous"></script>
+
+    <!-- ROG Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rog-red': '#ff0037',
+                        'rog-orange': '#ff6b35',
+                        'rog-dark': '#000000',
+                        'rog-light': '#1a1a1a',
+                        'rog-gray': '#333333',
+                        'rog-blue': '#00d4ff',
+                        'rog-purple': '#8b5cf6',
+                    },
+                    fontFamily: {
+                        'rog-display': ['Orbitron', 'monospace'],
+                        'rog-heading': ['Exo 2', 'sans-serif'],
+                        'rog-body': ['Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': {
+                                opacity: '0'
+                            },
+                            '100%': {
+                                opacity: '1'
+                            },
+                        },
+                        slideUp: {
+                            '0%': {
+                                transform: 'translateY(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInLeft: {
+                            '0%': {
+                                transform: 'translateX(-30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInRight: {
+                            '0%': {
+                                transform: 'translateX(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        float: {
+                            '0%, 100%': {
+                                transform: 'translateY(0px)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
+                        },
+                        glow: {
+                            '0%': {
+                                boxShadow: '0 0 20px rgba(220, 38, 38, 0.5)'
+                            },
+                            '100%': {
+                                boxShadow: '0 0 30px rgba(220, 38, 38, 0.8)'
+                            },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ROG font for order details */
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .rog-button {
+            background: linear-gradient(135deg, #ff0037 0%, #ff6b35 50%, #00d4ff 100%);
+            transition: all 0.3s ease;
+            border: 1px solid #ff0037;
+            box-shadow: 0 0 20px rgba(255, 0, 55, 0.3);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .rog-button:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff0037 50%, #8b5cf6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 0, 55, 0.6);
+            border-color: #00d4ff;
+        }
+
+        .rog-input {
+            background: #1a1a1a;
+            border: 1px solid #ff0037;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            width: 100%;
+        }
+
+        .rog-input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(255, 0, 55, 0.1);
+        }
+
+        .rog-select {
+            background: #1a1a1a;
+            border: 1px solid #4b5563;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            width: 100%;
+        }
+
+        .rog-select:focus {
+            outline: none;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+        }
+
+        /* Size Guide Tab Styles */
+        .size-tab {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .size-tab:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .size-tab.active {
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
+        }
+
+        .size-guide-content {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-rog-dark text-white">
+    <!-- Floating Chat Button -->
+    <button id="floating-chat-btn" class="fixed bottom-6 right-6 w-14 h-14 bg-red-600 rounded-full shadow-lg hover:bg-red-700 transition-all duration-200 z-40 flex items-center justify-center group md:hidden">
+        <i class="fas fa-comments text-white text-xl group-hover:scale-110 transition-transform"></i>
+    </button>
+
+    <!-- Customer Chat Modal -->
+    <div id="customer-chat-modal" class="fixed inset-0 z-50 bg-black bg-opacity-75 hidden">
+        <div class="fixed bottom-4 right-4 w-80 bg-gray-800 rounded-lg shadow-2xl border border-red-500/30">
+            <div class="flex flex-col h-96">
+                <!-- Chat Header -->
+                <div class="flex items-center justify-between p-4 border-b border-red-500/30 bg-gray-800 rounded-t-lg">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        <h3 class="text-lg font-semibold text-white">Customer Support</h3>
+                    </div>
+                    <button id="close-chat-modal" class="p-1 rounded hover:bg-red-500/20 transition-colors">
+                        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Customer Info Form -->
+                <div id="customer-info-form" class="p-4 space-y-4">
+                    <h4 class="text-white font-semibold mb-3">Please provide your details to start chatting:</h4>
+                    <input type="text" id="customer-name" placeholder="Full Name" class="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-red-500 focus:outline-none">
+                    <input type="email" id="customer-email" placeholder="Email Address" class="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-red-500 focus:outline-none">
+                    <input type="tel" id="customer-phone" placeholder="Mobile Number" class="w-full px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-red-500 focus:outline-none">
+                    <button id="start-chat-btn" class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors">
+                        Start Chat
+                    </button>
+                </div>
+
+                <!-- Chat Interface -->
+                <div id="chat-interface" class="hidden flex-1 flex flex-col">
+                    <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-2">
+                        <div class="text-center text-gray-400 text-sm">
+                            <p>Connected to support team</p>
+                        </div>
+                    </div>
+                    <div class="p-4 border-t border-red-500/30">
+                        <div class="flex space-x-2">
+                            <input type="text" id="chat-message-input" placeholder="Type your message..." class="flex-1 px-3 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:border-red-500 focus:outline-none">
+                            <button id="send-message-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-red-500 mb-2">Otomono Jerseys</h1>
+            <h2 class="text-xl text-gray-300">Complete Your Order Details</h2>
+            <p class="text-gray-400 mt-2">Please provide the following details to complete your jersey order</p>
+        </div>
+
+        <!-- Order Info -->
+        <div id="order-info" class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h3 class="text-lg font-semibold mb-4">Order Information</h3>
+            <div id="order-details" class="text-gray-300">
+                Loading order details...
+            </div>
+        </div>
+
+        <!-- Dynamic Jersey Forms Container -->
+        <div id="jersey-forms-container">
+            <!-- Forms will be dynamically generated here -->
+        </div>
+
+        <!-- Size Guidelines Section -->
+        <div class="mt-8">
+            <h3 class="text-xl font-semibold text-white mb-4 text-center text-black">
+                <i class="fas fa-ruler mr-2"></i> Size Guidelines
+            </h3>
+
+            <!-- Size Guide Tabs -->
+            <div class="bg-gray-800 rounded-lg p-4">
+                <div class="flex flex-wrap justify-center mb-4">
+                    <button onclick="showSizeGuide('adults')" id="adults-tab" class="size-tab active px-4 py-2 mx-1 mb-2 bg-red-600 text-white rounded-lg text-sm font-medium">
+                        Adults
+                    </button>
+                    <button onclick="showSizeGuide('kids')" id="kids-tab" class="size-tab px-4 py-2 mx-1 mb-2 bg-gray-600 text-white rounded-lg text-sm font-medium">
+                        Kids
+                    </button>
+                    <button onclick="showSizeGuide('muslimah')" id="muslimah-tab" class="size-tab px-4 py-2 mx-1 mb-2 bg-gray-600 text-white rounded-lg text-sm font-medium">
+                        Muslimah
+                    </button>
+                </div>
+
+                <!-- Adults Size Guide -->
+                <div id="adults-guide" class="size-guide-content">
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4 text-center text-black">Adults Size Guide</h4>
+                        <div class="mb-4 text-sm text-gray-600">
+                            <p class="font-semibold mb-2">Measurement Instructions:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>ALL MEASUREMENTS ARE IN INCHES</li>
+                                <li>WIDTH IS MEASURED FROM ARMPIT TO ARMPIT</li>
+                                <li>LENGTH IS MEASURED FROM HIGHEST POINT OF THE SHOULDER TO BOTTOM HEM</li>
+                                <li>SLEEVE IS MEASURED FROM THE CENTER OVER THE SHOULDER, DOWN TO THE END OF THE CUFF</li>
+                                <li>FOR RELAXED FIT, GO FOR A SIZE UP</li>
+                            </ul>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300 text-sm">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">Size</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">2XS</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">XS</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">S</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">M</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">L</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">XL</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">2XL</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">3XL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">CHEST (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">17</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">18</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">19</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">20</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">21</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">22</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">23</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">24</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">LENGTH (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">24</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">25</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">26</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">27</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">28</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">29</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">30</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">31</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">SHORT SLEEVE (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">6.5</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">7</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">7.5</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">8</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">8.5</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">9</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">9.5</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">LONG SLEEVE (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">20</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">21</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">22</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">23</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">24</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">25</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">26</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">27</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-2 text-center text-black">* Tolerance: +/- 0.5 inches</p>
+                    </div>
+                </div>
+
+                <!-- Kids Size Guide -->
+                <div id="kids-guide" class="size-guide-content hidden">
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4 text-center text-black">Kids Size Guide</h4>
+                        <div class="mb-4 text-sm text-gray-600">
+                            <p class="font-semibold mb-2">Measurement Instructions:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>ALL MEASUREMENTS ARE IN INCHES</li>
+                                <li>WIDTH IS MEASURED FROM ARMPIT TO ARMPIT</li>
+                                <li>LENGTH IS MEASURED FROM HIGHEST POINT OF THE SHOULDER TO BOTTOM HEM</li>
+                                <li>SLEEVE IS MEASURED FROM THE CENTER OVER THE SHOULDER, DOWN TO THE END OF THE CUFF</li>
+                                <li>FOR RELAXED FIT, GO FOR A SIZE UP</li>
+                            </ul>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300 text-sm">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">Size</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">3XS</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">2XS</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">XS</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">S</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">M</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">L</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">XL</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">2XL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">CHEST (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">8</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">10</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">11</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">12</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">13</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">14</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">15</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">16</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">LENGTH (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">13</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">15</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">16</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">17</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">18</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">19</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">20</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">21</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-2 text-center text-black">* Tolerance: +/- 0.5 inches</p>
+                    </div>
+                </div>
+
+                <!-- Muslimah Size Guide -->
+                <div id="muslimah-guide" class="size-guide-content hidden">
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4 text-center text-black">Muslimah Size Guide</h4>
+                        <div class="mb-4 text-sm text-gray-600">
+                            <p class="font-semibold mb-2">Measurement Instructions:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>ALL MEASUREMENTS ARE IN INCHES</li>
+                                <li>WIDTH IS MEASURED FROM ARMPIT TO ARMPIT</li>
+                                <li>LENGTH IS MEASURED FROM HIGHEST POINT OF THE SHOULDER TO BOTTOM HEM</li>
+                                <li>SLEEVE IS MEASURED FROM THE CENTER OVER THE SHOULDER, DOWN TO THE END OF THE CUFF</li>
+                                <li>FOR RELAXED FIT, GO FOR A SIZE UP</li>
+                            </ul>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse border border-gray-300 text-sm">
+                                <thead>
+                                    <tr class="bg-gray-100">
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">Size</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">S</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">M</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">L</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">XL</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">2XL</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">3XL</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">4XL</th>
+                                        <th class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">5XL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">CHEST (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">19</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">20</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">21</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">22</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">23</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">24</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">25</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">26</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">LENGTH (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">35</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">36</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">37</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">38</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">39</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">40</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">41</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">42</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-300 px-3 py-2 font-semibold text-gray-800">LONG SLEEVE (inches)</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">20</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">21</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">22</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">23</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">24</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">25</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">26</td>
+                                        <td class="border border-gray-300 px-3 py-2 text-center text-black">27</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-2 text-center text-black">* Tolerance: +/- 0.5 inches</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </form>
+
+        <!-- Loading Spinner -->
+        <div id="loading-spinner" class="fixed inset-0 bg-gray-900 bg-opacity-90 items-center justify-center z-50 hidden">
+            <div class="text-center text-black">
+                <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-red-500 mx-auto mb-4"></div>
+                <p class="text-white text-lg font-semibold">Saving Order Details...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get order ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('orderId');
+
+        if (!orderId) {
+            document.body.innerHTML = `
+                <div class="min-h-screen bg-gray-900 flex items-center justify-center">
+                    <div class="text-center text-black">
+                        <h1 class="text-2xl font-bold text-red-500 mb-4">Invalid Order Link</h1>
+                        <p class="text-gray-300">This order link is invalid or has expired.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Load order details and check if jersey details already exist
+        async function loadOrderDetails() {
+            console.log('Loading order details for orderId:', orderId);
+
+            // Get URL parameters as fallback
+            const urlParams = new URLSearchParams(window.location.search);
+            const fallbackOrder = {
+                orderId: urlParams.get('orderId') || orderId,
+                customerName: urlParams.get('customerName') || '',
+                customerEmail: urlParams.get('customerEmail') || '',
+                mobileNumber: urlParams.get('mobileNumber') || '',
+                materialPreference: urlParams.get('materialPreference') || '',
+                quantity: parseInt(urlParams.get('quantity') || '1'),
+                amount: urlParams.get('amount') || '',
+                status: urlParams.get('status') || 'processing',
+                createdAt: urlParams.get('createdAt') || new Date().toISOString()
+            };
+
+            try {
+                // First try to get from Firestore (where admin panel saves)
+                const {
+                    initializeApp,
+                    getApp
+                } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
+                const {
+                    getFirestore,
+                    doc,
+                    getDoc
+                } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+
+                const firebaseConfig = {
+                    apiKey: "AIzaSyBNWEchdrKX9A2WdMa3VTnpbKgo0_eWqHE",
+                    authDomain: "otomono-c9938.firebaseapp.com",
+                    projectId: "otomono-c9938",
+                    storageBucket: "otomono-c9938.firebasestorage.app",
+                    messagingSenderId: "348906539551",
+                    appId: "1:348906539551:web:e249c40d0ae9e2964a632a",
+                    measurementId: "G-YVL497L1V3"
+                };
+
+                // Initialize Firebase (reuse existing app if available)
+                let app;
+                try {
+                    app = getApp('load-order-firestore'); // Try to get existing app with unique name
+                    console.log('Using existing Firebase app');
+                } catch (error) {
+                    app = initializeApp(firebaseConfig, 'load-order-firestore'); // Create new app with unique name
+                    console.log('Created new Firebase app');
+                }
+                const firestore = getFirestore(app);
+
+                // Try to get order from Firestore first
+                try {
+                    console.log('Trying to fetch from Firestore...');
+                    const orderDocRef = doc(firestore, 'orders', orderId);
+                    const orderDoc = await getDoc(orderDocRef);
+
+                    if (orderDoc.exists()) {
+                        console.log('Order found in Firestore:', orderDoc.data());
+                        const order = orderDoc.data();
+
+                        // Check if jersey details already exist
+                        if (order.jerseys && Array.isArray(order.jerseys)) {
+                            console.log('Multiple jerseys found, showing submitted details');
+                            showSubmittedDetails(order);
+                            return;
+                        } else if (order.jerseyType || order.jerseyName || order.jerseyNumber) {
+                            console.log('Single jersey found, showing submitted details');
+                            showSubmittedDetails(order);
+                            return;
+                        } else {
+                            console.log('No jersey details found, showing form');
+                            showOrderForm(order);
+                            return;
+                        }
+                    } else {
+                        console.log('Order not found in Firestore');
+                    }
+                } catch (firestoreError) {
+                    console.warn('Firestore query failed, trying Realtime Database:', firestoreError.message);
+                }
+
+                // Fallback to Realtime Database
+                console.log('Trying Realtime Database fallback...');
+                const {
+                    getDatabase,
+                    ref,
+                    get
+                } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js');
+
+                const dbConfig = {
+                    ...firebaseConfig,
+                    databaseURL: "https://otomono-c9938-default-rtdb.firebaseio.com/"
+                };
+
+                let rtdbApp;
+                try {
+                    rtdbApp = getApp('load-order-rtdb'); // Try to get existing app with unique name
+                    console.log('Using existing RTDB app');
+                } catch (error) {
+                    rtdbApp = initializeApp(dbConfig, 'load-order-rtdb'); // Create new app with unique name
+                    console.log('Created new RTDB app');
+                }
+                const database = getDatabase(rtdbApp);
+
+                const orderRef = ref(database, `orders/${orderId}`);
+                const orderSnapshot = await get(orderRef);
+
+                if (orderSnapshot.exists()) {
+                    console.log('Order found in Realtime Database:', orderSnapshot.val());
+                    const order = orderSnapshot.val();
+
+                    // Check if jersey details already exist
+                    if (order.jerseyType || order.jerseyName || order.jerseyNumber) {
+                        console.log('Jersey details found, showing submitted details');
+                        showSubmittedDetails(order);
+                    } else {
+                        console.log('No jersey details found, showing form');
+                        showOrderForm(order);
+                    }
+                } else {
+                    console.log('Order not found in Realtime Database either, using URL parameters');
+                    // Use fallback order data from URL parameters
+                    showOrderForm(fallbackOrder);
+                }
+            } catch (error) {
+                console.error('Error loading order:', error);
+                console.log('Using fallback order data from URL parameters');
+                // Use fallback order data from URL parameters
+                showOrderForm(fallbackOrder);
+            }
+        }
+
+        // Show order form (when jersey details don't exist)
+        function showOrderForm(order) {
+            // Get URL parameters to populate initial order details
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            document.getElementById('order-details').innerHTML = `
+                <div class="bg-gray-800 rounded-lg p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
+                        <i class="fas fa-shopping-cart mr-2 text-blue-400"></i>
+                        Initial Order Details
+                    </h2>
+                    <div class="grid grid-cols-2 gap-4 text-sm" data-quantity="${urlParams.get('quantity') || order.quantity || 1}">
+                        <div><strong class="text-gray-300">Order ID:</strong> <span class="text-white">${urlParams.get('orderId') || order.orderId || orderId}</span></div>
+                        <div><strong class="text-gray-300">Customer:</strong> <span class="text-white">${urlParams.get('customerName') || order.customerName || 'N/A'}</span></div>
+                        <div><strong class="text-gray-300">Email:</strong> <span class="text-white">${urlParams.get('customerEmail') || order.customerEmail || 'N/A'}</span></div>
+                        <div><strong class="text-gray-300">Mobile:</strong> <span class="text-white">${urlParams.get('mobileNumber') || order.mobileNumber || 'N/A'}</span></div>
+                        <div><strong class="text-gray-300">Quantity:</strong> <span class="text-white">${urlParams.get('quantity') || order.quantity || 1}</span></div>
+                        <div><strong class="text-gray-300">Material:</strong> <span class="text-white">${urlParams.get('materialPreference') || order.materialPreference || 'N/A'}</span></div>
+                        <div><strong class="text-gray-300">Status:</strong> ${getStatusBadge(urlParams.get('status') || order.status || 'processing')}</div>
+                        <div><strong class="text-gray-300">Created:</strong> <span class="text-white">${formatDate(urlParams.get('createdAt') || order.createdAt || new Date().toISOString())}</span></div>
+                    </div>
+                </div>
+            `;
+
+            // Generate dynamic jersey forms based on quantity from URL params or order data
+            const quantity = parseInt(urlParams.get('quantity') || order.quantity || 1);
+            generateJerseyForms(quantity);
+        }
+
+        // Format date safely to avoid Invalid Date
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            
+            try {
+                const date = new Date(dateString);
+                if (isNaN(date.getTime())) {
+                    return 'N/A';
+                }
+                return date.toLocaleDateString();
+            } catch (error) {
+                console.warn('Date formatting error:', error);
+                return 'N/A';
+            }
+        }
+
+        // Get status badge with color coding
+        function getStatusBadge(status) {
+            const statusLower = (status || '').toLowerCase();
+
+            if (statusLower.includes('pending') || statusLower.includes('new')) {
+                return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
+                    <i class="fas fa-clock mr-1"></i>
+                    ${status}
+                </span>`;
+            } else if (statusLower.includes('processing') || statusLower.includes('in progress')) {
+                return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                    <i class="fas fa-cog mr-1"></i>
+                    ${status}
+                </span>`;
+            } else if (statusLower.includes('completed') || statusLower.includes('done') || statusLower.includes('finished')) {
+                return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
+                    <i class="fas fa-check-circle mr-1"></i>
+                    ${status}
+                </span>`;
+            } else if (statusLower.includes('cancelled') || statusLower.includes('canceled')) {
+                return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">
+                    <i class="fas fa-times-circle mr-1"></i>
+                    ${status}
+                </span>`;
+            } else if (statusLower.includes('on hold') || statusLower.includes('paused')) {
+                return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800 border border-orange-200">
+                    <i class="fas fa-pause-circle mr-1"></i>
+                    ${status}
+                </span>`;
+            } else if (statusLower.includes('shipped') || statusLower.includes('delivered')) {
+                return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 border border-purple-200">
+                    <i class="fas fa-truck mr-1"></i>
+                    ${status}
+                </span>`;
+            } else {
+                // Default status styling
+                return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 border border-gray-200">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    ${status}
+                </span>`;
+            }
+        }
+
+        // Generate dynamic jersey forms based on quantity
+        function generateJerseyForms(quantity) {
+            const container = document.getElementById('jersey-forms-container');
+            let formsHtml = '';
+
+            for (let i = 1; i <= quantity; i++) {
+                formsHtml += `
+                    <form id="jersey-form-${i}" class="bg-gray-800 rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold mb-6 flex items-center">
+                            <i class="fas fa-tshirt mr-2 text-red-500"></i>
+                            Jersey ${i} Details
+                        </h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Jersey Type -->
+                <div>
+                    <label class="block text-gray-300 text-sm mb-2">Jersey Type *</label>
+                                <select id="jersey-type-${i}" class="rog-select" required>
+                        <option value="">Select Jersey Type</option>
+                        <option value="Player Jersey">Player Jersey</option>
+                        <option value="Keeper Jersey">Keeper Jersey</option>
+                        <option value="Official Jersey">Official Jersey</option>
+                    </select>
+                </div>
+
+                <!-- Jersey Name -->
+                <div>
+                    <label class="block text-gray-300 text-sm mb-2">Jersey Name *</label>
+                                <input type="text" id="jersey-name-${i}" class="rog-input" placeholder="Enter jersey name" required>
+                </div>
+
+                <!-- Jersey Number -->
+                <div>
+                    <label class="block text-gray-300 text-sm mb-2">Jersey Number *</label>
+                                <input type="text" id="jersey-number-${i}" class="rog-input" placeholder="Enter number" pattern="[0-9]+" required>
+                </div>
+
+                <!-- Size Category -->
+                <div>
+                    <label class="block text-gray-300 text-sm mb-2">Size Category *</label>
+                                <select id="size-category-${i}" class="rog-select" required>
+                        <option value="">Select Size Category</option>
+                        <option value="Adult">Adult</option>
+                        <option value="Kids">Kids</option>
+                        <option value="Muslima">Muslima</option>
+                    </select>
+                </div>
+
+                <!-- Size -->
+                <div>
+                    <label class="block text-gray-300 text-sm mb-2">Size *</label>
+                                <select id="size-${i}" class="rog-select" required>
+                        <option value="">Select Size</option>
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="2XL">2XL</option>
+                        <option value="3XL">3XL</option>
+                    </select>
+                </div>
+
+                <!-- Sleeve -->
+                <div>
+                    <label class="block text-gray-300 text-sm mb-2">Sleeve *</label>
+                                <select id="sleeve-${i}" class="rog-select" required>
+                        <option value="">Select Sleeve</option>
+                        <option value="Short Sleeve">Short Sleeve</option>
+                        <option value="Long Sleeve">Long Sleeve</option>
+                    </select>
+                </div>
+
+                <!-- Shorts -->
+                <div>
+                    <label class="block text-gray-300 text-sm mb-2">Shorts *</label>
+                                <select id="shorts-${i}" class="rog-select" required>
+                        <option value="">Select Shorts</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+            </div>
+                    </form>
+                `;
+            }
+
+            // Add submit button
+            formsHtml += `
+                <div class="bg-gray-800 rounded-lg p-6">
+                    <div class="text-center">
+                        <button type="button" onclick="submitAllJerseyForms()" class="rog-button px-8 py-3">
+                            <i class="fas fa-check mr-2"></i> Complete All Jersey Details
+                </button>
+            </div>
+                </div>
+            `;
+
+            container.innerHTML = formsHtml;
+        }
+
+        // Show submitted details (read-only view)
+        function showSubmittedDetails(order) {
+            // Generate order summary with size breakdowns
+            const summary = generateOrderSummary(order);
+
+            document.body.innerHTML = `
+                <div class="min-h-screen bg-gray-900 py-8">
+                    <div class="max-w-4xl mx-auto px-4">
+                        <!-- Header -->
+                        <div class="text-center mb-8">
+                            <h1 class="text-3xl font-bold text-white mb-2">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                Jersey Details Already Submitted
+                            </h1>
+                            <p class="text-gray-400">Your jersey details have been successfully submitted.</p>
+                        </div>
+
+                        <!-- Order Summary -->
+                        <div class="bg-gray-800 rounded-lg p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                <i class="fas fa-chart-pie mr-2 text-purple-400"></i>
+                                Order Summary
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Size Breakdown -->
+                                <div class="bg-gray-700 rounded-lg p-4">
+                                    <h3 class="text-lg font-semibold text-white mb-3 flex items-center">
+                                        <i class="fas fa-ruler mr-2 text-blue-400"></i>
+                                        Size Breakdown
+                                    </h3>
+                                    <div class="space-y-2">
+                                        ${summary.sizeBreakdown.map(item => `
+                                            <div class="flex justify-between items-center py-1 border-b border-gray-600">
+                                                <span class="text-gray-300">${item.size}</span>
+                                                <span class="text-white font-semibold">${item.count}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                                
+                                <!-- Category Breakdown -->
+                                <div class="bg-gray-700 rounded-lg p-4">
+                                    <h3 class="text-lg font-semibold text-white mb-3 flex items-center">
+                                        <i class="fas fa-users mr-2 text-green-400"></i>
+                                        Category Breakdown
+                                    </h3>
+                                    <div class="space-y-2">
+                                        ${summary.categoryBreakdown.map(item => `
+                                            <div class="flex justify-between items-center py-1 border-b border-gray-600">
+                                                <span class="text-gray-300">${item.category}</span>
+                                                <span class="text-white font-semibold">${item.count}</span>
+                                            </div>
+                                        `).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Total Summary -->
+                            <div class="mt-4 bg-gray-600 rounded-lg p-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-lg font-semibold text-white">Total Jerseys:</span>
+                                    <span class="text-2xl font-bold text-red-400">${summary.totalJerseys}</span>
+            </div>
+        </div>
+    </div>
+
+                        <!-- Initial Order Details -->
+                        <div class="bg-gray-800 rounded-lg p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                <i class="fas fa-shopping-cart mr-2 text-blue-400"></i>
+                                Initial Order Details
+                            </h2>
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div><strong class="text-gray-300">Order ID:</strong> <span class="text-white">${order.orderId || orderId}</span></div>
+                                <div><strong class="text-gray-300">Customer:</strong> <span class="text-white">${order.customerName || 'N/A'}</span></div>
+                                <div><strong class="text-gray-300">Email:</strong> <span class="text-white">${order.customerEmail || 'N/A'}</span></div>
+                                <div><strong class="text-gray-300">Mobile:</strong> <span class="text-white">${order.mobileNumber || 'N/A'}</span></div>
+                                <div><strong class="text-gray-300">Quantity:</strong> <span class="text-white">${order.quantity || 1}</span></div>
+                                <div><strong class="text-gray-300">Material:</strong> <span class="text-white">${order.materialPreference || 'N/A'}</span></div>
+                                <div><strong class="text-gray-300">Status:</strong> ${getStatusBadge(order.status || 'processing')}</div>
+                                <div><strong class="text-gray-300">Created:</strong> <span class="text-white">${formatDate(order.createdAt || new Date().toISOString())}</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Submitted Jersey Details -->
+                        <div class="bg-gray-800 rounded-lg p-6 mb-6">
+                            <h2 class="text-xl font-semibold text-white mb-4 flex items-center">
+                                <i class="fas fa-tshirt mr-2 text-green-400"></i>
+                                Your Submitted Jersey Details
+                            </h2>
+                            ${generateJerseyDetailsHTML(order)}
+                        </div>
+
+                        <!-- Success Message -->
+                        <div class="bg-green-900 border border-green-700 rounded-lg p-6 text-center">
+                            <i class="fas fa-check-circle text-green-400 text-4xl mb-4"></i>
+                            <h3 class="text-xl font-semibold text-green-400 mb-2">Submission Complete!</h3>
+                            <p class="text-green-300 mb-4">Your jersey details have been successfully submitted and are being processed.</p>
+                            <p class="text-sm text-green-400">You will be contacted soon regarding your order.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Generate order summary with size and category breakdowns
+        function generateOrderSummary(order) {
+            let jerseys = [];
+
+            // Handle both new format (array) and legacy format (single object)
+            if (order.jerseys && Array.isArray(order.jerseys)) {
+                jerseys = order.jerseys;
+            } else if (order.jerseyType || order.jerseyName || order.jerseyNumber) {
+                // Legacy single jersey format
+                jerseys = [{
+                    jerseyNumber: 1,
+                    jerseyType: order.jerseyType || 'N/A',
+                    jerseyName: order.jerseyName || 'N/A',
+                    jerseyNumberValue: order.jerseyNumber || 'N/A',
+                    sizeCategory: order.sizeCategory || 'N/A',
+                    size: order.size || 'N/A',
+                    sleeve: order.sleeve || 'N/A',
+                    shorts: order.shorts || 'N/A',
+                    completedAt: order.completedAt || new Date().toISOString()
+                }];
+            }
+
+            // Count sizes
+            const sizeCounts = {};
+            const categoryCounts = {};
+
+            jerseys.forEach(jersey => {
+                const size = jersey.size || 'N/A';
+                const category = jersey.sizeCategory || 'N/A';
+
+                sizeCounts[size] = (sizeCounts[size] || 0) + 1;
+                categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+            });
+
+            // Convert to arrays for display
+            const sizeBreakdown = Object.entries(sizeCounts)
+                .map(([size, count]) => ({
+                    size,
+                    count
+                }))
+                .sort((a, b) => {
+                    const sizeOrder = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
+                    return sizeOrder.indexOf(a.size) - sizeOrder.indexOf(b.size);
+                });
+
+            const categoryBreakdown = Object.entries(categoryCounts)
+                .map(([category, count]) => ({
+                    category,
+                    count
+                }))
+                .sort((a, b) => a.category.localeCompare(b.category));
+
+            return {
+                totalJerseys: jerseys.length,
+                sizeBreakdown,
+                categoryBreakdown
+            };
+        }
+
+        // Generate jersey details HTML (handles both single and multiple jerseys)
+        function generateJerseyDetailsHTML(order) {
+            let jerseys = [];
+
+            // Handle both new format (array) and legacy format (single object)
+            if (order.jerseys && Array.isArray(order.jerseys)) {
+                jerseys = order.jerseys;
+            } else if (order.jerseyType || order.jerseyName || order.jerseyNumber) {
+                // Legacy single jersey format
+                jerseys = [{
+                    jerseyNumber: 1,
+                    jerseyType: order.jerseyType || 'N/A',
+                    jerseyName: order.jerseyName || 'N/A',
+                    jerseyNumberValue: order.jerseyNumber || 'N/A',
+                    sizeCategory: order.sizeCategory || 'N/A',
+                    size: order.size || 'N/A',
+                    sleeve: order.sleeve || 'N/A',
+                    shorts: order.shorts || 'N/A',
+                    completedAt: order.completedAt || new Date().toISOString()
+                }];
+            }
+
+            if (jerseys.length === 1) {
+                // Single jersey - show in simple format
+                const jersey = jerseys[0];
+                return `
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><strong class="text-gray-300">Jersey Type:</strong> <span class="text-white">${jersey.jerseyType}</span></div>
+                        <div><strong class="text-gray-300">Jersey Name:</strong> <span class="text-white">${jersey.jerseyName}</span></div>
+                        <div><strong class="text-gray-300">Jersey Number:</strong> <span class="text-white">${jersey.jerseyNumberValue}</span></div>
+                        <div><strong class="text-gray-300">Size Category:</strong> <span class="text-white">${jersey.sizeCategory}</span></div>
+                        <div><strong class="text-gray-300">Size:</strong> <span class="text-white">${jersey.size}</span></div>
+                        <div><strong class="text-gray-300">Sleeve:</strong> <span class="text-white">${jersey.sleeve}</span></div>
+                        <div><strong class="text-gray-300">Shorts:</strong> <span class="text-white">${jersey.shorts}</span></div>
+                        <div><strong class="text-gray-300">Submitted:</strong> <span class="text-white">${formatDate(jersey.completedAt)}</span></div>
+                        </div>
+                    `;
+            } else {
+                // Multiple jerseys - show in card format
+                return `
+                    <div class="space-y-4">
+                        ${jerseys.map((jersey, index) => `
+                            <div class="bg-gray-700 rounded-lg p-4 border border-gray-600">
+                                <h3 class="text-lg font-semibold text-white mb-3 flex items-center">
+                                    <i class="fas fa-tshirt mr-2 text-red-500"></i>
+                                    Jersey ${jersey.jerseyNumber || (index + 1)}
+                                </h3>
+                                <div class="grid grid-cols-2 gap-4 text-sm">
+                                    <div><strong class="text-gray-300">Type:</strong> <span class="text-white">${jersey.jerseyType}</span></div>
+                                    <div><strong class="text-gray-300">Name:</strong> <span class="text-white">${jersey.jerseyName}</span></div>
+                                    <div><strong class="text-gray-300">Number:</strong> <span class="text-white">${jersey.jerseyNumberValue}</span></div>
+                                    <div><strong class="text-gray-300">Category:</strong> <span class="text-white">${jersey.sizeCategory}</span></div>
+                                    <div><strong class="text-gray-300">Size:</strong> <span class="text-white">${jersey.size}</span></div>
+                                    <div><strong class="text-gray-300">Sleeve:</strong> <span class="text-white">${jersey.sleeve}</span></div>
+                                    <div><strong class="text-gray-300">Shorts:</strong> <span class="text-white">${jersey.shorts}</span></div>
+                                    <div><strong class="text-gray-300">Submitted:</strong> <span class="text-white">${formatDate(jersey.completedAt)}</span></div>
+                                </div>
+                        </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        // Size Guide Tab Switching Function
+        function showSizeGuide(category) {
+            // Hide all size guide contents
+            document.querySelectorAll('.size-guide-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Remove active class from all tabs
+            document.querySelectorAll('.size-tab').forEach(tab => {
+                tab.classList.remove('active', 'bg-red-600');
+                tab.classList.add('bg-gray-600');
+            });
+
+            // Show selected content
+            document.getElementById(category + '-guide').classList.remove('hidden');
+
+            // Activate selected tab
+            const activeTab = document.getElementById(category + '-tab');
+            activeTab.classList.add('active', 'bg-red-600');
+            activeTab.classList.remove('bg-gray-600');
+        }
+
+        // Submit all jersey forms
+        window.submitAllJerseyForms = async function() {
+            // Validate orderId exists
+            if (!orderId) {
+                alert('Invalid order link. Please contact support.');
+                return;
+            }
+
+            // Get order quantity to determine how many forms to process
+            const quantityElement = document.querySelector('[data-quantity]');
+            const orderQuantity = parseInt(quantityElement ? quantityElement.dataset.quantity : '1') || 1;
+            const allJerseyData = [];
+
+            // Collect data from all jersey forms
+            for (let i = 1; i <= orderQuantity; i++) {
+                const jerseyData = {
+                    jerseyNumber: i,
+                    jerseyType: (document.getElementById(`jersey-type-${i}`) || {}).value || '',
+                    jerseyName: (document.getElementById(`jersey-name-${i}`) || {}).value || '',
+                    jerseyNumberValue: (document.getElementById(`jersey-number-${i}`) || {}).value || '',
+                    sizeCategory: (document.getElementById(`size-category-${i}`) || {}).value || '',
+                    size: (document.getElementById(`size-${i}`) || {}).value || '',
+                    sleeve: (document.getElementById(`sleeve-${i}`) || {}).value || '',
+                    shorts: (document.getElementById(`shorts-${i}`) || {}).value || ''
+                };
+
+                // Validate required fields for this jersey
+                if (!jerseyData.jerseyType || !jerseyData.jerseyName || !jerseyData.jerseyNumberValue ||
+                    !jerseyData.sizeCategory || !jerseyData.size || !jerseyData.sleeve || !jerseyData.shorts) {
+                    alert(`Please fill in all required fields for Jersey ${i}.`);
+                    return;
+                }
+
+                allJerseyData.push(jerseyData);
+            }
+
+            const formData = {
+                jerseys: allJerseyData,
+                completedAt: new Date().toISOString()
+            };
+
+            // Show loading spinner
+            document.getElementById('loading-spinner').classList.remove('hidden');
+
+            try {
+                // Import Firebase modules
+                const {
+                    initializeApp,
+                    getApp
+                } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
+                const {
+                    getFirestore,
+                    doc,
+                    updateDoc
+                } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+                const {
+                    getDatabase,
+                    ref,
+                    update
+                } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js');
+
+                const firebaseConfig = {
+                    apiKey: "AIzaSyBNWEchdrKX9A2WdMa3VTnpbKgo0_eWqHE",
+                    authDomain: "otomono-c9938.firebaseapp.com",
+                    projectId: "otomono-c9938",
+                    storageBucket: "otomono-c9938.firebasestorage.app",
+                    messagingSenderId: "348906539551",
+                    appId: "1:348906539551:web:e249c40d0ae9e2964a632a",
+                    measurementId: "G-YVL497L1V3"
+                };
+
+                // Initialize Firebase (reuse existing app if available)
+                let app;
+                try {
+                    app = getApp(); // Try to get existing app
+                } catch (error) {
+                    app = initializeApp(firebaseConfig); // Create new app if none exists
+                }
+                const firestore = getFirestore(app);
+
+                // Try to save to Firestore first (for admin panel)
+                try {
+                    const {
+                        setDoc
+                    } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+
+                    const orderDocRef = doc(firestore, 'orders', orderId);
+                    await setDoc(orderDocRef, formData, {
+                        merge: true
+                    });
+                    console.log('Order details saved to Firestore successfully');
+                } catch (firestoreError) {
+                    console.warn('Firestore save failed, trying Realtime Database:', firestoreError.message);
+
+                    try {
+                        // Fallback to Realtime Database
+                        const dbConfig = {
+                            ...firebaseConfig,
+                            databaseURL: "https://otomono-c9938-default-rtdb.firebaseio.com/"
+                        };
+                        let rtdbApp;
+                        try {
+                            rtdbApp = getApp('realtime-db'); // Try to get existing RTDB app
+                        } catch (error) {
+                            rtdbApp = initializeApp(dbConfig, 'realtime-db'); // Create new RTDB app
+                        }
+                        const database = getDatabase(rtdbApp);
+                        const orderRef = ref(database, `orders/${orderId}`);
+                        await update(orderRef, formData);
+                        console.log('Order details saved to Realtime Database successfully');
+                    } catch (rtdbError) {
+                        console.warn('Realtime Database save failed, trying local storage:', rtdbError.message);
+
+                        // Final fallback to local storage
+                        try {
+                            const localOrders = JSON.parse(localStorage.getItem('clientOrders') || '[]');
+                            const orderWithDetails = {
+                                orderId: orderId,
+                                ...formData,
+                                savedAt: new Date().toISOString(),
+                                savedTo: 'local-storage'
+                            };
+                            localOrders.push(orderWithDetails);
+                            localStorage.setItem('clientOrders', JSON.stringify(localOrders));
+                            console.log('Order details saved to local storage successfully');
+                        } catch (localError) {
+                            console.error('All save methods failed:', localError);
+                            throw new Error('Unable to save order details. Please try again or contact support.');
+                        }
+                    }
+                }
+
+                // Hide loading spinner
+                document.getElementById('loading-spinner').classList.add('hidden');
+
+                // Show success message with jersey details
+                const jerseySummary = allJerseyData.map((jersey, index) =>
+                    `<div class="bg-gray-700 rounded-lg p-3 mb-2">
+                        <h4 class="font-semibold text-white mb-1">Jersey ${jersey.jerseyNumber}</h4>
+                        <p class="text-sm text-gray-300">${jersey.jerseyName} - ${jersey.jerseyType}</p>
+                        <p class="text-sm text-gray-400">Size: ${jersey.size} (${jersey.sizeCategory})</p>
+                    </div>`
+                ).join('');
+
+                document.body.innerHTML = `
+                    <div class="min-h-screen bg-gray-900 flex items-center justify-center py-8">
+                        <div class="text-center bg-gray-800 rounded-lg p-8 max-w-2xl w-full mx-4">
+                            <div class="text-green-500 text-4xl mb-4">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h1 class="text-2xl font-bold text-white mb-4">All Jersey Details Submitted!</h1>
+                            <p class="text-gray-300 mb-6">Thank you for providing details for all ${allJerseyData.length} jersey(s). Your order has been updated and will be processed accordingly.</p>
+                            
+                            <div class="bg-gray-700 rounded-lg p-4 mb-4">
+                                <h3 class="font-semibold text-white mb-3">Submitted Jerseys:</h3>
+                                ${jerseySummary}
+                            </div>
+                            
+                            <div class="bg-gray-700 rounded-lg p-4">
+                                <p class="text-sm text-gray-400">Order ID: ${orderId}</p>
+                                <p class="text-sm text-gray-400">Submitted: ${new Date().toLocaleString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error saving order details:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    code: error.code,
+                    stack: error.stack
+                });
+                document.getElementById('loading-spinner').classList.add('hidden');
+
+                document.body.innerHTML = `
+                    <div class="min-h-screen bg-gray-900 flex items-center justify-center">
+                        <div class="text-center text-black">
+                            <div class="text-red-500 text-4xl mb-4">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <h1 class="text-2xl font-bold text-red-500 mb-4">Error</h1>
+                            <p class="text-gray-300 mb-2">There was an error saving your order details.</p>
+                            <p class="text-gray-400 text-sm mb-6">Error: ${error.message}</p>
+                            <button onclick="window.location.reload()" class="rog-button">Try Again</button>
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        // Load order details on page load
+        if (orderId) {
+            // Add timeout to prevent infinite loading
+            const loadingTimeout = setTimeout(() => {
+                console.error('Loading timeout reached');
+                document.getElementById('order-details').innerHTML = `
+                    <div class="text-yellow-400 text-center text-black">
+                        <i class="fas fa-clock text-2xl mb-2"></i>
+                        <p>Loading is taking longer than expected...</p>
+                        <button onclick="loadOrderDetails()" class="rog-button mt-2">Retry</button>
+                    </div>
+                `;
+            }, 10000); // 10 second timeout
+
+            loadOrderDetails().finally(() => {
+                clearTimeout(loadingTimeout);
+            });
+        } else {
+            document.getElementById('order-details').innerHTML = `
+                <div class="text-red-400 text-center text-black">
+                    <i class="fas fa-exclamation-triangle text-2xl mb-2"></i>
+                    <p>Invalid order link. No order ID found.</p>
+                </div>
+            `;
+        }
+    </script>
+
+    <script>
+        // Customer Chat System
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingChatBtn = document.getElementById('floating-chat-btn');
+            const customerChatModal = document.getElementById('customer-chat-modal');
+            const closeChatModal = document.getElementById('close-chat-modal');
+            const customerInfoForm = document.getElementById('customer-info-form');
+            const chatInterface = document.getElementById('chat-interface');
+            const startChatBtn = document.getElementById('start-chat-btn');
+            const chatMessageInput = document.getElementById('chat-message-input');
+            const sendMessageBtn = document.getElementById('send-message-btn');
+            const chatMessages = document.getElementById('chat-messages');
+
+            let customerInfo = null;
+            let chatMessagesList = [];
+
+            // Open chat modal
+            if (floatingChatBtn) {
+                floatingChatBtn.addEventListener('click', function() {
+                    customerChatModal.classList.remove('hidden');
+                    console.log('Customer chat modal opened');
+                });
+            }
+
+            // Close chat modal
+            if (closeChatModal) {
+                closeChatModal.addEventListener('click', function() {
+                    customerChatModal.classList.add('hidden');
+                    console.log('Customer chat modal closed');
+                });
+            }
+
+            // Start chat
+            if (startChatBtn) {
+                startChatBtn.addEventListener('click', function() {
+                    const name = document.getElementById('customer-name').value.trim();
+                    const email = document.getElementById('customer-email').value.trim();
+                    const phone = document.getElementById('customer-phone').value.trim();
+
+                    if (!name || !email || !phone) {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+
+                    customerInfo = {
+                        name,
+                        email,
+                        phone
+                    };
+                    customerInfoForm.classList.add('hidden');
+                    chatInterface.classList.remove('hidden');
+
+                    // Add welcome message
+                    addChatMessage('Hello! I\'m ' + name + '. I need help with my order.', 'customer');
+
+                    // Notify admin panel
+                    notifyAdminNewCustomer(name, email, phone);
+
+                    console.log('Chat started for customer:', customerInfo);
+                });
+            }
+
+            // Send message
+            function sendMessage() {
+                const message = chatMessageInput.value.trim();
+                if (message && customerInfo) {
+                    addChatMessage(message, 'customer');
+                    chatMessageInput.value = '';
+
+                    // Notify admin panel
+                    notifyAdminNewMessage(customerInfo.name, message);
+
+                    // Simulate admin response
+                    setTimeout(() => {
+                        addChatMessage('Thank you for your message. Our support team will get back to you shortly.', 'admin');
+                    }, 2000);
+                }
+            }
+
+            if (sendMessageBtn) {
+                sendMessageBtn.addEventListener('click', sendMessage);
+            }
+
+            if (chatMessageInput) {
+                chatMessageInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        sendMessage();
+                    }
+                });
+            }
+
+            function addChatMessage(message, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = `flex ${sender === 'customer' ? 'justify-end' : 'justify-start'}`;
+
+                const messageContent = document.createElement('div');
+                messageContent.className = `max-w-xs px-3 py-2 rounded-lg ${
+                    sender === 'customer' 
+                        ? 'bg-red-600 text-white' 
+                        : 'bg-gray-700 text-white'
+                }`;
+
+                messageContent.innerHTML = `
+                    <p class="text-sm">${message}</p>
+                    <p class="text-xs opacity-70 mt-1">${new Date().toLocaleTimeString()}</p>
+                `;
+
+                messageDiv.appendChild(messageContent);
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                chatMessagesList.push({
+                    message,
+                    sender,
+                    timestamp: new Date().toISOString()
+                });
+            }
+
+            function notifyAdminNewCustomer(name, email, phone) {
+                // This would send a notification to the admin panel
+                console.log('New customer chat started:', {
+                    name,
+                    email,
+                    phone
+                });
+                // In a real implementation, this would use Firebase or WebSocket
+            }
+
+            function notifyAdminNewMessage(customerName, message) {
+                // This would send a message notification to the admin panel
+                console.log('New message from customer:', {
+                    customerName,
+                    message
+                });
+                // In a real implementation, this would use Firebase or WebSocket
+            }
+
+            // Close chat modal when clicking outside
+            if (customerChatModal) {
+                customerChatModal.addEventListener('click', function(e) {
+                    if (e.target === customerChatModal) {
+                        customerChatModal.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

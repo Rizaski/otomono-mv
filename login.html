@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Otomono Jerseys</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="apple-touch-icon" href="public/favicon.png">
+    <link rel="shortcut icon" href="public/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Direct Firebase configuration for login
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getAuth } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBNWEchdrKX9A2WdMa3VTnpbKgo0_eWqHE",
+            authDomain: "otomono-c9938.firebaseapp.com",
+            projectId: "otomono-c9938",
+            storageBucket: "otomono-c9938.firebasestorage.app",
+            messagingSenderId: "348906539551",
+            appId: "1:348906539551:web:e249c40d0ae9e2964a632a",
+            measurementId: "G-YVL497L1V3"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+        
+        // Make auth available globally
+        window.firebaseAuth = auth;
+        window.firebaseApp = app;
+        
+        console.log('Firebase initialized successfully');
+    </script>
+
+    <!-- ROG Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rog-red': '#ff0037',
+                        'rog-orange': '#ff6b35',
+                        'rog-dark': '#000000',
+                        'rog-light': '#1a1a1a',
+                        'rog-gray': '#333333',
+                        'rog-blue': '#00d4ff',
+                        'rog-purple': '#8b5cf6',
+                    },
+                    fontFamily: {
+                        'rog-display': ['Orbitron', 'monospace'],
+                        'rog-heading': ['Exo 2', 'sans-serif'],
+                        'rog-body': ['Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out',
+                        'slide-in-right': 'slideInRight 0.8s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': {
+                                opacity: '0'
+                            },
+                            '100%': {
+                                opacity: '1'
+                            },
+                        },
+                        slideUp: {
+                            '0%': {
+                                transform: 'translateY(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateY(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInLeft: {
+                            '0%': {
+                                transform: 'translateX(-30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        slideInRight: {
+                            '0%': {
+                                transform: 'translateX(30px)',
+                                opacity: '0'
+                            },
+                            '100%': {
+                                transform: 'translateX(0)',
+                                opacity: '1'
+                            },
+                        },
+                        float: {
+                            '0%, 100%': {
+                                transform: 'translateY(0px)'
+                            },
+                            '50%': {
+                                transform: 'translateY(-20px)'
+                            },
+                        },
+                        glow: {
+                            '0%': {
+                                boxShadow: '0 0 20px rgba(220, 38, 38, 0.5)'
+                            },
+                            '100%': {
+                                boxShadow: '0 0 30px rgba(220, 38, 38, 0.8)'
+                            },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --rog-dark: #000000;
+            --rog-light: #1a1a1a;
+            --rog-red: #ff0037;
+            --rog-orange: #ff6b35;
+            --rog-blue: #00d4ff;
+            --rog-purple: #8b5cf6;
+            --rog-gray: #333333;
+        }
+
+        .font-rog-display {
+            font-family: 'Orbitron', monospace;
+        }
+
+        .font-rog-heading {
+            font-family: 'Exo 2', sans-serif;
+        }
+
+        .font-rog-body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .rog-button {
+            background: linear-gradient(135deg, #ff0037 0%, #ff6b35 50%, #00d4ff 100%);
+            transition: all 0.3s ease;
+            border: 1px solid #ff0037;
+            box-shadow: 0 0 20px rgba(255, 0, 55, 0.3);
+        }
+
+        .rog-button:hover {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff0037 50%, #8b5cf6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 0, 55, 0.6);
+            border-color: #00d4ff;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 30%, #333333 70%, #000000 100%);
+            position: relative;
+        }
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 0, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 0, 55, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glow {
+            text-shadow: 0 0 10px rgba(255, 0, 55, 0.5);
+        }
+
+        .bg-rog-dark {
+            background-color: var(--rog-dark);
+        }
+
+        .bg-rog-light {
+            background-color: var(--rog-light);
+        }
+
+        .text-rog-red {
+            color: var(--rog-red);
+        }
+
+        .text-rog-gold {
+            color: var(--rog-gold);
+        }
+
+        .border-rog-red {
+            border-color: var(--rog-red);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-rog-dark text-white hero-gradient">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass-effect border-b border-rog-red shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <a href="index.html" class="hover:opacity-80 transition-opacity duration-200">
+                        <img src="public/logo.png" alt="Otomono Logo" class="h-8 w-auto" />
+                    </a>
+                </div>
+
+                <!-- Back to Site Button -->
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-white hover:text-rog-red font-rog-heading font-medium transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Site
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8">
+            <!-- Login Form Card -->
+            <div class="bg-rog-light/20 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-rog-red/30">
+                <div class="text-center mb-8">
+                    <div class="mx-auto h-16 w-16 bg-rog-red/20 rounded-full flex items-center justify-center mb-4">
+                        <svg class="h-8 w-8 text-rog-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl font-rog-display font-bold text-white glow">Admin Login</h2>
+                    <p class="mt-2 text-sm text-gray-400 font-rog-body">Staff and admin access only</p>
+                </div>
+
+                <form id="admin-login-form" class="space-y-6">
+                    <div>
+                        <label for="admin-email" class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            Email Address
+                        </label>
+                        <input id="admin-email" name="email" type="email" required class="w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-rog-red focus:border-rog-red text-white placeholder-gray-400 font-rog-body transition-all duration-300" placeholder="Enter your email">
+                    </div>
+
+                    <div>
+                        <label for="admin-password" class="block text-sm font-rog-heading font-medium text-rog-red mb-2">
+                            Password
+                        </label>
+                        <input id="admin-password" name="password" type="password" required class="w-full px-4 py-3 bg-rog-light/20 border border-rog-red/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-rog-red focus:border-rog-red text-white placeholder-gray-400 font-rog-body transition-all duration-300" placeholder="Enter your password">
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full rog-button py-3 px-6 rounded-lg font-rog-heading font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Login to Admin Panel
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-rog-dark border-t border-rog-red/20 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400 text-sm font-rog-body">
+                © 2024 Otomono Jerseys. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Admin login page loaded');
+
+            const adminLoginForm = document.getElementById('admin-login-form');
+            const emailInput = document.getElementById('admin-email');
+            const passwordInput = document.getElementById('admin-password');
+
+            // Focus on email input
+            emailInput.focus();
+
+            // Admin login form submission
+            if (adminLoginForm) {
+                adminLoginForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const email = emailInput.value.trim();
+                    const password = passwordInput.value;
+
+                    console.log('Admin login attempt:', email);
+
+                    // Check if Firebase is ready
+                    if (!window.firebaseAuth) {
+                        console.error('Firebase not initialized');
+                        alert('Firebase not ready. Please refresh the page and try again.');
+                        return;
+                    }
+
+                    // Show loading state
+                    const submitBtn = adminLoginForm.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Authenticating...';
+                    submitBtn.disabled = true;
+
+                    // Firebase Authentication
+                    try {
+                        console.log('Attempting Firebase authentication for:', email);
+
+                        // Check if Firebase is initialized
+                        if (!window.firebaseAuth) {
+                            throw new Error('Firebase not initialized. Please refresh the page.');
+                        }
+
+                        // Import signInWithEmailAndPassword
+                        const {
+                            signInWithEmailAndPassword
+                        } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+
+                        // Attempt Firebase sign in
+                        const userCredential = await signInWithEmailAndPassword(window.firebaseAuth, email, password);
+                        const user = userCredential.user;
+
+                        console.log('Firebase authentication successful:', user.email);
+
+                        // Store admin session
+                        localStorage.setItem('adminUser', JSON.stringify({
+                            id: user.uid,
+                            email: user.email,
+                            name: user.displayName || user.email.split('@')[0],
+                            userType: 'admin',
+                            loginTime: new Date().toISOString()
+                        }));
+
+                        // Show success message
+                        submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Login Successful!';
+                        submitBtn.classList.add('bg-green-600');
+
+                        setTimeout(() => {
+                            window.location.href = 'admin-customers.html';
+                        }, 1500);
+
+                    } catch (error) {
+                        console.error('Firebase authentication failed:', error);
+                        console.error('Error details:', {
+                            code: error.code,
+                            message: error.message,
+                            stack: error.stack
+                        });
+
+                        // Show error message
+                        let errorMessage = 'Login Failed';
+                        if (error.code === 'auth/user-not-found') {
+                            errorMessage = 'User not found';
+                        } else if (error.code === 'auth/wrong-password') {
+                            errorMessage = 'Invalid password';
+                        } else if (error.code === 'auth/invalid-email') {
+                            errorMessage = 'Invalid email';
+                        } else if (error.code === 'auth/too-many-requests') {
+                            errorMessage = 'Too many attempts. Try again later';
+                        } else if (error.code === 'auth/network-request-failed') {
+                            errorMessage = 'Network error. Please check your connection';
+                        } else if (error.message.includes('Firebase not initialized')) {
+                            errorMessage = 'Firebase not ready. Please refresh the page';
+                        } else {
+                            errorMessage = `Login failed: ${error.message}`;
+                        }
+
+                        submitBtn.innerHTML = `<i class="fas fa-times mr-2"></i>${errorMessage}`;
+                        submitBtn.classList.add('bg-red-600');
+
+                        setTimeout(() => {
+                            submitBtn.innerHTML = originalText;
+                            submitBtn.classList.remove('bg-red-600');
+                            submitBtn.disabled = false;
+                        }, 3000);
+                    }
+                });
+            }
+
+            // Enter key handling
+            passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    adminLoginForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

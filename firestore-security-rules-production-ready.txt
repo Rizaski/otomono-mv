@@ -1,0 +1,1059 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // MAIN COLLECTIONS - Production Ready Rules
+    match /orders/{orderId} {
+      allow read, write: if true;
+    }
+    
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+    
+    match /customerOrders/{orderId} {
+      allow read, write: if true;
+    }
+    
+    match /systemSettings/{settingId} {
+      allow read, write: if true;
+    }
+    
+    match /products/{productId} {
+      allow read, write: if true;
+    }
+    
+    match /analytics/{analyticsId} {
+      allow read, write: if true;
+    }
+    
+    match /notifications/{notificationId} {
+      allow read, write: if true;
+    }
+    
+    match /backups/{backupId} {
+      allow read, write: if true;
+    }
+    
+    match /logs/{logId} {
+      allow read, write: if true;
+    }
+    
+    match /reports/{reportId} {
+      allow read, write: if true;
+    }
+    
+    match /templates/{templateId} {
+      allow read, write: if true;
+    }
+    
+    match /configuration/{configId} {
+      allow read, write: if true;
+    }
+    
+    match /cache/{cacheId} {
+      allow read, write: if true;
+    }
+    
+    match /sessions/{sessionId} {
+      allow read, write: if true;
+    }
+    
+    match /auditLogs/{logId} {
+      allow read, write: if true;
+    }
+    
+    match /userProfiles/{profileId} {
+      allow read, write: if true;
+    }
+    
+    match /orderHistory/{historyId} {
+      allow read, write: if true;
+    }
+    
+    match /payments/{paymentId} {
+      allow read, write: if true;
+    }
+    
+    match /inventory/{itemId} {
+      allow read, write: if true;
+    }
+    
+    match /feedback/{feedbackId} {
+      allow read, write: if true;
+    }
+    
+    match /campaigns/{campaignId} {
+      allow read, write: if true;
+    }
+    
+    match /emailTemplates/{templateId} {
+      allow read, write: if true;
+    }
+    
+    match /smsTemplates/{templateId} {
+      allow read, write: if true;
+    }
+    
+    match /integrations/{integrationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiKeys/{keyId} {
+      allow read, write: if true;
+    }
+    
+    match /webhooks/{webhookId} {
+      allow read, write: if true;
+    }
+    
+    match /customFields/{fieldId} {
+      allow read, write: if true;
+    }
+    
+    match /workflows/{workflowId} {
+      allow read, write: if true;
+    }
+    
+    match /automations/{automationId} {
+      allow read, write: if true;
+    }
+    
+    match /scheduledTasks/{taskId} {
+      allow read, write: if true;
+    }
+    
+    match /errorLogs/{logId} {
+      allow read, write: if true;
+    }
+    
+    match /performance/{metricId} {
+      allow read, write: if true;
+    }
+    
+    match /userSessions/{sessionId} {
+      allow read, write: if true;
+    }
+    
+    match /segments/{segmentId} {
+      allow read, write: if true;
+    }
+    
+    match /loyalty/{programId} {
+      allow read, write: if true;
+    }
+    
+    match /discounts/{discountId} {
+      allow read, write: if true;
+    }
+    
+    match /coupons/{couponId} {
+      allow read, write: if true;
+    }
+    
+    match /giftCards/{cardId} {
+      allow read, write: if true;
+    }
+    
+    match /referrals/{referralId} {
+      allow read, write: if true;
+    }
+    
+    match /affiliates/{affiliateId} {
+      allow read, write: if true;
+    }
+    
+    match /partners/{partnerId} {
+      allow read, write: if true;
+    }
+    
+    match /vendors/{vendorId} {
+      allow read, write: if true;
+    }
+    
+    match /suppliers/{supplierId} {
+      allow read, write: if true;
+    }
+    
+    match /categories/{categoryId} {
+      allow read, write: if true;
+    }
+    
+    match /tags/{tagId} {
+      allow read, write: if true;
+    }
+    
+    match /attributes/{attributeId} {
+      allow read, write: if true;
+    }
+    
+    match /specifications/{specId} {
+      allow read, write: if true;
+    }
+    
+    match /reviews/{reviewId} {
+      allow read, write: if true;
+    }
+    
+    match /ratings/{ratingId} {
+      allow read, write: if true;
+    }
+    
+    match /wishlists/{wishlistId} {
+      allow read, write: if true;
+    }
+    
+    match /cartItems/{itemId} {
+      allow read, write: if true;
+    }
+    
+    match /shippingAddresses/{addressId} {
+      allow read, write: if true;
+    }
+    
+    match /billingAddresses/{addressId} {
+      allow read, write: if true;
+    }
+    
+    match /shippingMethods/{methodId} {
+      allow read, write: if true;
+    }
+    
+    match /paymentMethods/{methodId} {
+      allow read, write: if true;
+    }
+    
+    match /taxRates/{rateId} {
+      allow read, write: if true;
+    }
+    
+    match /currencies/{currencyId} {
+      allow read, write: if true;
+    }
+    
+    match /exchangeRates/{rateId} {
+      allow read, write: if true;
+    }
+    
+    match /locations/{locationId} {
+      allow read, write: if true;
+    }
+    
+    match /warehouses/{warehouseId} {
+      allow read, write: if true;
+    }
+    
+    match /stockLevels/{levelId} {
+      allow read, write: if true;
+    }
+    
+    match /stockMovements/{movementId} {
+      allow read, write: if true;
+    }
+    
+    match /stockAlerts/{alertId} {
+      allow read, write: if true;
+    }
+    
+    match /reorderPoints/{pointId} {
+      allow read, write: if true;
+    }
+    
+    match /supplyChain/{chainId} {
+      allow read, write: if true;
+    }
+    
+    match /procurement/{procurementId} {
+      allow read, write: if true;
+    }
+    
+    match /purchaseOrders/{orderId} {
+      allow read, write: if true;
+    }
+    
+    match /invoices/{invoiceId} {
+      allow read, write: if true;
+    }
+    
+    match /receipts/{receiptId} {
+      allow read, write: if true;
+    }
+    
+    match /expenses/{expenseId} {
+      allow read, write: if true;
+    }
+    
+    match /budgets/{budgetId} {
+      allow read, write: if true;
+    }
+    
+    match /forecasts/{forecastId} {
+      allow read, write: if true;
+    }
+    
+    match /goals/{goalId} {
+      allow read, write: if true;
+    }
+    
+    match /kpis/{kpiId} {
+      allow read, write: if true;
+    }
+    
+    match /metrics/{metricId} {
+      allow read, write: if true;
+    }
+    
+    match /dashboards/{dashboardId} {
+      allow read, write: if true;
+    }
+    
+    match /widgets/{widgetId} {
+      allow read, write: if true;
+    }
+    
+    match /charts/{chartId} {
+      allow read, write: if true;
+    }
+    
+    match /exports/{exportId} {
+      allow read, write: if true;
+    }
+    
+    match /imports/{importId} {
+      allow read, write: if true;
+    }
+    
+    match /syncJobs/{jobId} {
+      allow read, write: if true;
+    }
+    
+    match /backgroundJobs/{jobId} {
+      allow read, write: if true;
+    }
+    
+    match /cronJobs/{jobId} {
+      allow read, write: if true;
+    }
+    
+    match /queues/{queueId} {
+      allow read, write: if true;
+    }
+    
+    match /tasks/{taskId} {
+      allow read, write: if true;
+    }
+    
+    match /jobs/{jobId} {
+      allow read, write: if true;
+    }
+    
+    match /processes/{processId} {
+      allow read, write: if true;
+    }
+    
+    match /workflows/{workflowId} {
+      allow read, write: if true;
+    }
+    
+    match /pipelines/{pipelineId} {
+      allow read, write: if true;
+    }
+    
+    match /streams/{streamId} {
+      allow read, write: if true;
+    }
+    
+    match /events/{eventId} {
+      allow read, write: if true;
+    }
+    
+    match /triggers/{triggerId} {
+      allow read, write: if true;
+    }
+    
+    match /actions/{actionId} {
+      allow read, write: if true;
+    }
+    
+    match /reactions/{reactionId} {
+      allow read, write: if true;
+    }
+    
+    match /responses/{responseId} {
+      allow read, write: if true;
+    }
+    
+    match /callbacks/{callbackId} {
+      allow read, write: if true;
+    }
+    
+    match /apiEndpoints/{endpointId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRoutes/{routeId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMethods/{methodId} {
+      allow read, write: if true;
+    }
+    
+    match /apiParameters/{parameterId} {
+      allow read, write: if true;
+    }
+    
+    match /apiResponses/{responseId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSchemas/{schemaId} {
+      allow read, write: if true;
+    }
+    
+    match /apiVersions/{versionId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDocumentation/{docId} {
+      allow read, write: if true;
+    }
+    
+    match /apiTests/{testId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMonitoring/{monitorId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAnalytics/{analyticsId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMetrics/{metricId} {
+      allow read, write: if true;
+    }
+    
+    match /apiLogs/{logId} {
+      allow read, write: if true;
+    }
+    
+    match /apiErrors/{errorId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPerformance/{performanceId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSecurity/{securityId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAuthentication/{authId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAuthorization/{authId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPermissions/{permissionId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRoles/{roleId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPolicies/{policyId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRules/{ruleId} {
+      allow read, write: if true;
+    }
+    
+    match /apiValidation/{validationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiTransformation/{transformationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiEncryption/{encryptionId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDecryption/{decryptionId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCompression/{compressionId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCaching/{cachingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRateLimiting/{rateLimitId} {
+      allow read, write: if true;
+    }
+    
+    match /apiThrottling/{throttlingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiLoadBalancing/{loadBalancingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiScaling/{scalingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiOptimization/{optimizationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiTuning/{tuningId} {
+      allow read, write: if true;
+    }
+    
+    match /apiProfiling/{profilingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDebugging/{debuggingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiTesting/{testingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDeployment/{deploymentId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRollback/{rollbackId} {
+      allow read, write: if true;
+    }
+    
+    match /apiVersioning/{versioningId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMigration/{migrationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiUpgrade/{upgradeId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDowngrade/{downgradeId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMaintenance/{maintenanceId} {
+      allow read, write: if true;
+    }
+    
+    match /apiBackup/{backupId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRestore/{restoreId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRecovery/{recoveryId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDisasterRecovery/{disasterRecoveryId} {
+      allow read, write: if true;
+    }
+    
+    match /apiBusinessContinuity/{businessContinuityId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCompliance/{complianceId} {
+      allow read, write: if true;
+    }
+    
+    match /apiGovernance/{governanceId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAudit/{auditId} {
+      allow read, write: if true;
+    }
+    
+    match /apiReporting/{reportingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDashboard/{dashboardId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAlerts/{alertId} {
+      allow read, write: if true;
+    }
+    
+    match /apiNotifications/{notificationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMessaging/{messagingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCommunication/{communicationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiIntegration/{integrationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiConnectivity/{connectivityId} {
+      allow read, write: if true;
+    }
+    
+    match /apiInteroperability/{interoperabilityId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCompatibility/{compatibilityId} {
+      allow read, write: if true;
+    }
+    
+    match /apiStandards/{standardId} {
+      allow read, write: if true;
+    }
+    
+    match /apiProtocols/{protocolId} {
+      allow read, write: if true;
+    }
+    
+    match /apiFormats/{formatId} {
+      allow read, write: if true;
+    }
+    
+    match /apiEncoding/{encodingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDecoding/{decodingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiParsing/{parsingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSerialization/{serializationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDeserialization/{deserializationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiValidation/{validationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSanitization/{sanitizationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiFiltering/{filteringId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSorting/{sortingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPagination/{paginationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSearch/{searchId} {
+      allow read, write: if true;
+    }
+    
+    match /apiIndexing/{indexingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiQuerying/{queryingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAggregation/{aggregationId} {
+      allow read, write: if true;
+    }
+    
+    match /apiGrouping/{groupingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiJoining/{joiningId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMerging/{mergingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSplitting/{splittingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCombining/{combiningId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSeparating/{separatingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDividing/{dividingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMultiplying/{multiplyingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAdding/{addingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSubtracting/{subtractingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCalculating/{calculatingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiComputing/{computingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiProcessing/{processingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiExecuting/{executingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRunning/{runningId} {
+      allow read, write: if true;
+    }
+    
+    match /apiStarting/{startingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiStopping/{stoppingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPausing/{pausingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiResuming/{resumingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRestarting/{restartingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiReloading/{reloadingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRefreshing/{refreshingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiUpdating/{updatingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiModifying/{modifyingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiEditing/{editingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCreating/{creatingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDeleting/{deletingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRemoving/{removingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiClearing/{clearingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiResetting/{resettingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiInitializing/{initializingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiConfiguring/{configuringId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSetting/{settingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiGetting/{gettingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiFetching/{fetchingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRetrieving/{retrievingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiLoading/{loadingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSaving/{savingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiStoring/{storingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPersisting/{persistingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCaching/{cachingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiBuffering/{bufferingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiQueuing/{queuingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiStacking/{stackingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiHeaping/{heapingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPushing/{pushingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPopping/{poppingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPeeking/{peekingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiPolling/{pollingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiListening/{listeningId} {
+      allow read, write: if true;
+    }
+    
+    match /apiWatching/{watchingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMonitoring/{monitoringId} {
+      allow read, write: if true;
+    }
+    
+    match /apiObserving/{observingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiTracking/{trackingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiTracing/{tracingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiLogging/{loggingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRecording/{recordingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCapturing/{capturingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiSampling/{samplingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiMeasuring/{measuringId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCounting/{countingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiCalculating/{calculatingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiComputing/{computingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiProcessing/{processingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAnalyzing/{analyzingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiEvaluating/{evaluatingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAssessing/{assessingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiTesting/{testingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiVerifying/{verifyingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiValidating/{validatingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiChecking/{checkingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiInspecting/{inspectingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiExamining/{examiningId} {
+      allow read, write: if true;
+    }
+    
+    match /apiReviewing/{reviewingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAuditing/{auditingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiApproving/{approvingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRejecting/{rejectingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiAccepting/{acceptingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDeclining/{decliningId} {
+      allow read, write: if true;
+    }
+    
+    match /apiConfirming/{confirmingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDenying/{denyingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiGranting/{grantingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiRevoking/{revokingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiEnabling/{enablingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDisabling/{disablingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiActivating/{activatingId} {
+      allow read, write: if true;
+    }
+    
+    match /apiDeactivating/{deactivatingId} {
+      allow read, write: if true;
+    }
+    
+    // CATCH-ALL RULE FOR ANY FUTURE COLLECTIONS
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

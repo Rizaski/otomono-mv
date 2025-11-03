@@ -1,0 +1,26 @@
+{
+    "name": "Otomono Jerseys - Premium Jersey Design & Printing",
+    "short_name": "Otomono Jerseys",
+    "description": "Premium jersey design, printing, and selling services. Quality materials, professional printing, and fast delivery for all your team needs.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#dc2626",
+    "orientation": "portrait-primary",
+    "icons": [{
+            "src": "public/favicon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "public/favicon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["business", "shopping", "sports"],
+    "lang": "en",
+    "dir": "ltr"
+}

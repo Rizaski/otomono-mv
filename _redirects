@@ -1,0 +1,9 @@
+# Redirects for better SEO and user experience
+/designer /contact.html 301
+/design /contact.html 301
+/services /services.html 301
+/about /about.html 301
+/contact /contact.html 301
+
+# Fallback for any 404s
+/* /index.html 404

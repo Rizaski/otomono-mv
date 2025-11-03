@@ -1,0 +1,85 @@
+{
+    "version": 2,
+    "builds": [{
+            "src": "*.html",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "public/**/*",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "jersey-designs/**/*",
+            "use": "@vercel/static"
+        },
+        {
+            "src": "js/**/*",
+            "use": "@vercel/static"
+        }
+    ],
+    "rewrites": [{
+            "source": "/admin-panel",
+            "destination": "/admin-panel.html"
+        },
+        {
+            "source": "/login",
+            "destination": "/login.html"
+        },
+        {
+            "source": "/contact",
+            "destination": "/contact.html"
+        },
+        {
+            "source": "/public/(.*)",
+            "destination": "/public/$1"
+        },
+        {
+            "source": "/jersey-designs/(.*)",
+            "destination": "/jersey-designs/$1"
+        },
+        {
+            "source": "/js/(.*)",
+            "destination": "/js/$1"
+        }
+    ],
+    "headers": [{
+        "source": "/(.*)",
+        "headers": [{
+                "key": "X-Content-Type-Options",
+                "value": "nosniff"
+            },
+            {
+                "key": "X-Frame-Options",
+                "value": "SAMEORIGIN"
+            },
+            {
+                "key": "X-XSS-Protection",
+                "value": "1; mode=block"
+            },
+            {
+                "key": "Access-Control-Allow-Origin",
+                "value": "https://jeyseybizzz.vercel.app, https://otomono.vercel.app"
+            },
+            {
+                "key": "Access-Control-Allow-Methods",
+                "value": "GET, POST, PUT, DELETE, OPTIONS"
+            },
+            {
+                "key": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization, X-Requested-With, Accept, Origin, X-Requested-With"
+            },
+            {
+                "key": "Access-Control-Allow-Credentials",
+                "value": "true"
+            },
+            {
+                "key": "Access-Control-Max-Age",
+                "value": "86400"
+            },
+            {
+                "key": "Referrer-Policy",
+                "value": "strict-origin-when-cross-origin"
+            }
+        ]
+    }]
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Otomono Jerseys</title>
+    <meta name="description" content="The page you're looking for doesn't exist. Return to Otomono Jerseys homepage.">
+    <link rel="icon" type="image/png" href="public/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#dc2626',
+                        secondary: '#6b7280',
+                        accent: '#ff5630',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'Poppins', 'Roboto', 'Segoe UI', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-white">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <a href="index.html" class="hover:opacity-80 transition-opacity duration-200">
+                        <img src="public/logo.png" alt="Otomono Logo" class="h-8 w-auto" />
+                    </a>
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-primary font-medium transition-colors">Home</a>
+                    <a href="services.html" class="text-gray-700 hover:text-primary font-medium transition-colors">Services</a>
+                    <a href="about.html" class="text-gray-700 hover:text-primary font-medium transition-colors">About</a>
+                    <a href="contact.html" class="text-gray-700 hover:text-primary font-medium transition-colors">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-all duration-200">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 404 Error Section -->
+    <section class="min-h-screen flex items-center justify-center bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="space-y-8">
+                <!-- Error Code -->
+                <div class="space-y-4">
+                    <h1 class="text-9xl font-bold text-primary">404</h1>
+                    <h2 class="text-4xl font-bold text-gray-800">Page Not Found</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Sorry, the page you're looking for doesn't exist. It might have been moved, deleted, or you entered the wrong URL.
+                    </p>
+                </div>
+
+                <!-- Illustration -->
+                <div class="flex justify-center">
+                    <div class="w-64 h-64 bg-gradient-to-br from-primary/20 to-red-200 rounded-full flex items-center justify-center">
+                        <svg class="w-32 h-32 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.34 0-4.29-1.009-5.824-2.709M15 6.334A7.962 7.962 0 0012 5c-2.34 0-4.29 1.009-5.824 2.709" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="index.html" class="inline-block bg-primary text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-red-700 transition-colors shadow-lg">
+                        Go Home
+                    </a>
+                    <a href="contact.html" class="inline-block bg-white text-primary border-2 border-primary px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
+                        Contact Support
+                    </a>
+                </div>
+
+                <!-- Helpful Links -->
+                <div class="pt-8 border-t border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Popular Pages</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <a href="index.html" class="text-gray-600 hover:text-primary transition-colors">Home</a>
+                        <a href="services.html" class="text-gray-600 hover:text-primary transition-colors">Services</a>
+                        <a href="about.html" class="text-gray-600 hover:text-primary transition-colors">About</a>
+                        <a href="contact.html" class="text-gray-600 hover:text-primary transition-colors">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-5">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <img src="public/logo-white.png" alt="Otomono Logo" class="h-8 w-auto mr-3" />
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md text-sm">
+                        Premium jersey design, printing, and selling services. Quality materials, professional printing, and fast delivery for all your team needs.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-base font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors text-sm">Home</a></li>
+                        <li><a href="services.html" class="text-gray-400 hover:text-white transition-colors text-sm">Services</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition-colors text-sm">About</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition-colors text-sm">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-base font-semibold mb-4">Contact Info</h3>
+                    <ul class="space-y-2">
+                        <li class="text-gray-400 text-sm">info@otomono.com</li>
+                        <li class="text-gray-400 text-sm">+960 7XXX 777</li>
+                        <li class="text-gray-400 text-sm">Noomuraka, Manadhoo</li>
+                        <li class="text-gray-400 text-sm">20199, Noonu Atoll</li>
+                        <li class="text-gray-400 text-sm">Republic of Maldives</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-xs">
+                    © 2024 Otomono Jerseys. All rights reserved.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white text-xs transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xs transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white text-xs transition-colors">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    alert('Mobile menu would be implemented here');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
